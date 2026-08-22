@@ -1,53 +1,35 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-  /* ==================================================
-     MOBILE NAVIGATION
-  ================================================== */
+  /* =========================================================
+     1. HELPERS
+  ========================================================= */
+
+  const $ = (selector, scope = document) =>
+    scope.querySelector(selector);
+
+  const $$ = (selector, scope = document) =>
+    Array.from(scope.querySelectorAll(selector));
+
+
+  const prefersReducedMotion =
+    window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+
+
+
+  /* =========================================================
+     2. MOBILE NAVIGATION
+  ========================================================= */
 
   const menuButton =
-    document.querySelector(".menu-toggle");
+    $(".menu-toggle");
 
   const mobileMenu =
-    document.querySelector(".mobile-menu");
+    $(".mobile-menu");
 
   const mobileLinks =
-    document.querySelectorAll(".mobile-menu a");
-
-
-  function closeMenu() {
-
-    if (!menuButton || !mobileMenu) {
-      return;
-    }
-
-
-    menuButton.classList.remove(
-      "is-open"
-    );
-
-
-    mobileMenu.classList.remove(
-      "is-open"
-    );
-
-
-    menuButton.setAttribute(
-      "aria-expanded",
-      "false"
-    );
-
-
-    menuButton.setAttribute(
-      "aria-label",
-      "Open navigation"
-    );
-
-
-    document.body.classList.remove(
-      "menu-open"
-    );
-
-  }
+    $$(".mobile-menu a");
 
 
   function openMenu() {
@@ -83,25 +65,101 @@ document.addEventListener("DOMContentLoaded", () => {
       "menu-open"
     );
 
+
+    /*
+     Move keyboard focus into the menu.
+     Small delay allows the menu transition
+     to begin first.
+    */
+
+    window.setTimeout(() => {
+
+      const firstLink =
+        mobileMenu.querySelector("a");
+
+      if (firstLink) {
+        firstLink.focus();
+      }
+
+    }, 120);
+
   }
 
 
-  if (menuButton && mobileMenu) {
+  function closeMenu({
+    returnFocus = false
+  } = {}) {
+
+    if (!menuButton || !mobileMenu) {
+      return;
+    }
+
+
+    menuButton.classList.remove(
+      "is-open"
+    );
+
+
+    mobileMenu.classList.remove(
+      "is-open"
+    );
+
+
+    menuButton.setAttribute(
+      "aria-expanded",
+      "false"
+    );
+
+
+    menuButton.setAttribute(
+      "aria-label",
+      "Open navigation"
+    );
+
+
+    document.body.classList.remove(
+      "menu-open"
+    );
+
+
+    if (returnFocus) {
+
+      menuButton.focus();
+
+    }
+
+  }
+
+
+  function menuIsOpen() {
+
+    return (
+      menuButton &&
+      menuButton.getAttribute(
+        "aria-expanded"
+      ) === "true"
+    );
+
+  }
+
+
+  if (
+    menuButton &&
+    mobileMenu
+  ) {
 
     menuButton.addEventListener(
       "click",
       () => {
 
-        const isOpen =
-          menuButton.getAttribute(
-            "aria-expanded"
-          ) === "true";
+        if (menuIsOpen()) {
 
-
-        if (isOpen) {
           closeMenu();
+
         } else {
+
           openMenu();
+
         }
 
       }
@@ -113,33 +171,130 @@ document.addEventListener("DOMContentLoaded", () => {
 
         link.addEventListener(
           "click",
-          closeMenu
+          () => {
+
+            closeMenu();
+
+          }
         );
 
       }
     );
 
 
+    /*
+     ESC closes mobile navigation.
+    */
+
     document.addEventListener(
       "keydown",
       (event) => {
 
-        if (event.key === "Escape") {
-          closeMenu();
+        if (
+          event.key === "Escape" &&
+          menuIsOpen()
+        ) {
+
+          closeMenu({
+            returnFocus: true
+          });
+
         }
 
       }
     );
 
 
+    /*
+     Basic focus trap for mobile navigation.
+    */
+
+    mobileMenu.addEventListener(
+      "keydown",
+      (event) => {
+
+        if (
+          event.key !== "Tab" ||
+          !menuIsOpen()
+        ) {
+          return;
+        }
+
+
+        const focusableItems =
+          $$(
+            'a[href], button:not([disabled])',
+            mobileMenu
+          );
+
+
+        if (
+          focusableItems.length === 0
+        ) {
+          return;
+        }
+
+
+        const firstItem =
+          focusableItems[0];
+
+
+        const lastItem =
+          focusableItems[
+            focusableItems.length - 1
+          ];
+
+
+        if (
+          event.shiftKey &&
+          document.activeElement ===
+            firstItem
+        ) {
+
+          event.preventDefault();
+
+          lastItem.focus();
+
+        }
+
+
+        if (
+          !event.shiftKey &&
+          document.activeElement ===
+            lastItem
+        ) {
+
+          event.preventDefault();
+
+          firstItem.focus();
+
+        }
+
+      }
+    );
+
+
+    /*
+     Desktop resize automatically
+     resets the mobile menu.
+    */
+
     window.addEventListener(
       "resize",
       () => {
 
-        if (window.innerWidth > 900) {
+        if (
+          window.innerWidth > 900 &&
+          menuIsOpen()
+        ) {
+
           closeMenu();
+
         }
 
+      },
+      {
+        passive: true
       }
     );
 
@@ -147,14 +302,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
-  /* ==================================================
-     SMOOTH INTERNAL LINKS
-  ================================================== */
+  /* =========================================================
+     3. SMOOTH INTERNAL NAVIGATION
+  ========================================================= */
 
   const internalLinks =
-    document.querySelectorAll(
-      'a[href^="#"]'
-    );
+    $$('a[href^="#"]');
 
 
   internalLinks.forEach(
@@ -165,7 +318,9 @@ document.addEventListener("DOMContentLoaded", () => {
         (event) => {
 
           const targetId =
-            link.getAttribute("href");
+            link.getAttribute(
+              "href"
+            );
 
 
           if (
@@ -177,9 +332,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
           const target =
-            document.querySelector(
-              targetId
-            );
+            $(targetId);
 
 
           if (!target) {
@@ -191,9 +344,32 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
           target.scrollIntoView({
-            behavior: "smooth",
-            block: "start",
+            behavior:
+              prefersReducedMotion
+                ? "auto"
+                : "smooth",
+
+            block:
+              "start"
           });
+
+
+          /*
+           Update URL hash without
+           forcing another jump.
+          */
+
+          if (
+            history.pushState
+          ) {
+
+            history.pushState(
+              null,
+              "",
+              targetId
+            );
+
+          }
 
         }
       );
@@ -203,39 +379,123 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
-  /* ==================================================
-     SAFE SCROLL REVEAL
+  /* =========================================================
+     4. SAFE SCROLL REVEALS
 
      IMPORTANT:
-     The page is visible by default.
+     Nothing is hidden in the CSS by default.
 
-     JavaScript only hides elements that are safely
-     below the initial viewport.
+     JS hides ONLY elements that:
+     - are below the initial viewport
+     - are registered with the observer
 
-     Therefore:
-     - if JS fails, page stays visible
-     - if JS is cached incorrectly, page stays visible
-     - first screen never disappears
-  ================================================== */
-
-  const prefersReducedMotion =
-    window.matchMedia(
-      "(prefers-reduced-motion: reduce)"
-    ).matches;
-
+     A fallback timer makes everything
+     visible even if the observer fails.
+  ========================================================= */
 
   const revealItems =
-    Array.from(
-      document.querySelectorAll(
-        ".reveal"
-      )
+    $$(".reveal");
+
+
+  /*
+   Add additional subtle animation
+   targets without changing HTML.
+  */
+
+  const workflowPills =
+    $$(".workflow-strip span");
+
+
+  workflowPills.forEach(
+    (item) => {
+
+      if (
+        !item.classList.contains(
+          "reveal"
+        )
+      ) {
+
+        item.classList.add(
+          "reveal"
+        );
+
+      }
+
+    }
+  );
+
+
+  const allRevealItems =
+    $$(".reveal");
+
+
+  function showElement(
+    element
+  ) {
+
+    element.classList.remove(
+      "reveal-pending"
     );
+
+  }
+
+
+  function showAllElements() {
+
+    allRevealItems.forEach(
+      (element) => {
+
+        showElement(
+          element
+        );
+
+      }
+    );
+
+  }
 
 
   if (
-    !prefersReducedMotion &&
-    "IntersectionObserver" in window
+    prefersReducedMotion ||
+    !(
+      "IntersectionObserver"
+      in window
+    )
   ) {
+
+    showAllElements();
+
+  } else {
+
+    /*
+     Only hide elements that begin
+     below most of the first viewport.
+     This protects the hero from
+     disappearing during page load.
+    */
+
+    allRevealItems.forEach(
+      (element) => {
+
+        const rect =
+          element
+            .getBoundingClientRect();
+
+
+        if (
+          rect.top >
+          window.innerHeight * 0.88
+        ) {
+
+          element.classList.add(
+            "reveal-pending"
+          );
+
+        }
+
+      }
+    );
+
 
     const revealObserver =
       new IntersectionObserver(
@@ -248,17 +508,14 @@ document.addEventListener("DOMContentLoaded", () => {
                 entry.isIntersecting
               ) {
 
-                entry.target
-                  .classList
-                  .remove(
-                    "reveal-pending"
-                  );
+                showElement(
+                  entry.target
+                );
 
 
-                revealObserver
-                  .unobserve(
-                    entry.target
-                  );
+                revealObserver.unobserve(
+                  entry.target
+                );
 
               }
 
@@ -267,38 +524,213 @@ document.addEventListener("DOMContentLoaded", () => {
 
         },
         {
-          threshold: 0.08,
+          threshold:
+            0.08,
 
           rootMargin:
-            "0px 0px -25px 0px",
+            "0px 0px -35px 0px"
         }
       );
 
 
-    revealItems.forEach(
-      (item) => {
-
-        const rect =
-          item.getBoundingClientRect();
-
-
-        /*
-         Only animate content that starts
-         below the visible first screen.
-        */
+    allRevealItems.forEach(
+      (element) => {
 
         if (
-          rect.top >
-          window.innerHeight * 0.9
+          element.classList.contains(
+            "reveal-pending"
+          )
         ) {
 
-          item.classList.add(
-            "reveal-pending"
+          revealObserver.observe(
+            element
+          );
+
+        }
+
+      }
+    );
+
+
+    /*
+     Safety fallback:
+     even if observer behavior fails,
+     nothing can remain hidden.
+    */
+
+    window.setTimeout(
+      showAllElements,
+      2200
+    );
+
+  }
+
+
+
+  /* =========================================================
+     5. STAGGERED PROJECT CARD ANIMATION
+  ========================================================= */
+
+  if (
+    !prefersReducedMotion
+  ) {
+
+    const projectCards =
+      $$(".project-card");
+
+
+    projectCards.forEach(
+      (card, index) => {
+
+        const delay =
+          Math.min(
+            index * 55,
+            220
           );
 
 
-          revealObserver.observe(
-            item
+        card.style.transitionDelay =
+          `${delay}ms`;
+
+      }
+    );
+
+
+    /*
+     Metrics reveal slightly after
+     the containing card.
+    */
+
+    const metricBlocks =
+      $$(".metric-block");
+
+
+    metricBlocks.forEach(
+      (metric, index) => {
+
+        const delay =
+          (
+            index % 3
+          ) * 55;
+
+
+        metric.style.transitionDelay =
+          `${delay}ms`;
+
+      }
+    );
+
+
+    /*
+     DMAIC sequence receives a
+     restrained cascading reveal.
+    */
+
+    const methodSteps =
+      $$(".method-step");
+
+
+    methodSteps.forEach(
+      (step, index) => {
+
+        step.style.transitionDelay =
+          `${Math.min(
+            index * 45,
+            225
+          )}ms`;
+
+      }
+    );
+
+
+    /*
+     Credential cards.
+    */
+
+    const credentials =
+      $$(".credential");
+
+
+    credentials.forEach(
+      (credential, index) => {
+
+        credential.style.transitionDelay =
+          `${Math.min(
+            index * 50,
+            180
+          )}ms`;
+
+      }
+    );
+
+
+    /*
+     CME workflow pills.
+    */
+
+    workflowPills.forEach(
+      (pill, index) => {
+
+        pill.style.transitionDelay =
+          `${Math.min(
+            index * 32,
+            190
+          )}ms`;
+
+      }
+    );
+
+  }
+
+
+
+  /* =========================================================
+     6. ACTIVE NAVIGATION SECTION
+  ========================================================= */
+
+  const navigationLinks =
+    $$(
+      '.desktop-nav a[href^="#"], ' +
+      '.mobile-menu a[href^="#"]'
+    );
+
+
+  const trackedSections =
+    $$(
+      "#work, " +
+      "#approach, " +
+      "#about, " +
+      "#credentials"
+    );
+
+
+  function updateActiveNavigation(
+    sectionId
+  ) {
+
+    navigationLinks.forEach(
+      (link) => {
+
+        const href =
+          link.getAttribute(
+            "href"
+          );
+
+
+        if (
+          href ===
+          `#${sectionId}`
+        ) {
+
+          link.setAttribute(
+            "aria-current",
+            "true"
+          );
+
+        } else {
+
+          link.removeAttribute(
+            "aria-current"
           );
 
         }
@@ -309,21 +741,219 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
 
+  if (
+    "IntersectionObserver"
+      in window &&
+    trackedSections.length
+  ) {
 
-  /* ==================================================
-     CURRENT YEAR
-  ================================================== */
+    const sectionObserver =
+      new IntersectionObserver(
+        (entries) => {
+
+          const visibleEntries =
+            entries
+              .filter(
+                (entry) =>
+                  entry.isIntersecting
+              )
+              .sort(
+                (a, b) =>
+                  b.intersectionRatio -
+                  a.intersectionRatio
+              );
+
+
+          if (
+            visibleEntries.length
+          ) {
+
+            updateActiveNavigation(
+              visibleEntries[0]
+                .target
+                .id
+            );
+
+          }
+
+        },
+        {
+          rootMargin:
+            "-28% 0px -58% 0px",
+
+          threshold:
+            [
+              0,
+              0.15,
+              0.3,
+              0.5
+            ]
+        }
+      );
+
+
+    trackedSections.forEach(
+      (section) => {
+
+        sectionObserver.observe(
+          section
+        );
+
+      }
+    );
+
+  }
+
+
+
+  /* =========================================================
+     7. DESKTOP CARD POINTER EFFECT
+
+     Very restrained.
+     Only enabled on devices that have:
+     - a mouse / precise pointer
+     - hover capability
+
+     No effect on mobile or tablet touch.
+  ========================================================= */
+
+  const supportsHover =
+    window.matchMedia(
+      "(hover: hover) and (pointer: fine)"
+    ).matches;
+
+
+  if (
+    supportsHover &&
+    !prefersReducedMotion
+  ) {
+
+    const cards =
+      $$(".project-card");
+
+
+    cards.forEach(
+      (card) => {
+
+        card.addEventListener(
+          "pointermove",
+          (event) => {
+
+            const rect =
+              card.getBoundingClientRect();
+
+
+            const x =
+              (
+                event.clientX -
+                rect.left
+              ) /
+              rect.width;
+
+
+            const y =
+              (
+                event.clientY -
+                rect.top
+              ) /
+              rect.height;
+
+
+            /*
+             Extremely subtle perspective.
+             CSS hover still controls
+             primary card movement.
+            */
+
+            const rotateX =
+              (
+                0.5 - y
+              ) * 1.2;
+
+
+            const rotateY =
+              (
+                x - 0.5
+              ) * 1.2;
+
+
+            card.style.transform =
+              `
+                translateY(-6px)
+                perspective(900px)
+                rotateX(${rotateX}deg)
+                rotateY(${rotateY}deg)
+              `;
+
+          }
+        );
+
+
+        card.addEventListener(
+          "pointerleave",
+          () => {
+
+            card.style.transform =
+              "";
+
+          }
+        );
+
+      }
+    );
+
+  }
+
+
+
+  /* =========================================================
+     8. PAGE VISIBILITY SAFETY
+
+     Handles browser back/forward cache,
+     mobile tab restore and similar cases.
+  ========================================================= */
+
+  window.addEventListener(
+    "pageshow",
+    () => {
+
+      /*
+       Hero content should always
+       remain immediately visible.
+      */
+
+      const heroReveal =
+        $$(".hero .reveal");
+
+
+      heroReveal.forEach(
+        (element) => {
+
+          element.classList.remove(
+            "reveal-pending"
+          );
+
+        }
+      );
+
+    }
+  );
+
+
+
+  /* =========================================================
+     9. CURRENT YEAR
+  ========================================================= */
 
   const year =
-    document.getElementById(
-      "year"
-    );
+    $("#year");
 
 
   if (year) {
 
     year.textContent =
-      new Date().getFullYear();
+      new Date()
+        .getFullYear();
 
   }
 
