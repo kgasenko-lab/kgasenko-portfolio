@@ -1,8 +1,15 @@
-document.addEventListener("DOMContentLoaded", () => {
+/* ============================================================
+   KSENIIA GASENKO PORTFOLIO
+   MAIN JAVASCRIPT
+============================================================ */
 
-  /* =========================================================
-     1. HELPERS
-  ========================================================= */
+(() => {
+  "use strict";
+
+
+  /* ==========================================================
+     HELPERS
+  ========================================================== */
 
   const $ = (selector, scope = document) =>
     scope.querySelector(selector);
@@ -11,811 +18,557 @@ document.addEventListener("DOMContentLoaded", () => {
     Array.from(scope.querySelectorAll(selector));
 
 
-  const prefersReducedMotion =
-    window.matchMedia(
-      "(prefers-reduced-motion: reduce)"
-    ).matches;
+  /* ==========================================================
+     ELEMENTS
+  ========================================================== */
+
+  const body = document.body;
+
+  const header = $(".site-header");
+
+  const menuToggle = $(".menu-toggle");
+
+  const mobileMenu = $("#mobile-menu");
+
+  const mobileLinks = $$("#mobile-menu a");
+
+  const internalLinks = $$('a[href^="#"]');
+
+  const revealItems = $$(".reveal");
+
+  const yearElement = $("#year");
 
 
+  /* ==========================================================
+     CURRENT YEAR
+  ========================================================== */
 
-  /* =========================================================
-     2. MOBILE NAVIGATION
-  ========================================================= */
-
-  const menuButton =
-    $(".menu-toggle");
-
-  const mobileMenu =
-    $(".mobile-menu");
-
-  const mobileLinks =
-    $$(".mobile-menu a");
+  if (yearElement) {
+    yearElement.textContent =
+      new Date().getFullYear();
+  }
 
 
-  function openMenu() {
+  /* ==========================================================
+     MOBILE MENU
+  ========================================================== */
 
-    if (!menuButton || !mobileMenu) {
+  const openMenu = () => {
+
+    if (!menuToggle || !mobileMenu) {
       return;
     }
 
+    menuToggle.classList.add("is-open");
 
-    menuButton.classList.add(
-      "is-open"
-    );
+    mobileMenu.classList.add("is-open");
 
+    body.classList.add("menu-open");
 
-    mobileMenu.classList.add(
-      "is-open"
-    );
-
-
-    menuButton.setAttribute(
+    menuToggle.setAttribute(
       "aria-expanded",
       "true"
     );
 
-
-    menuButton.setAttribute(
+    menuToggle.setAttribute(
       "aria-label",
       "Close navigation"
     );
 
-
-    document.body.classList.add(
-      "menu-open"
-    );
+  };
 
 
-    /*
-     Move keyboard focus into the menu.
-     Small delay allows the menu transition
-     to begin first.
-    */
+  const closeMenu = () => {
 
-    window.setTimeout(() => {
-
-      const firstLink =
-        mobileMenu.querySelector("a");
-
-      if (firstLink) {
-        firstLink.focus();
-      }
-
-    }, 120);
-
-  }
-
-
-  function closeMenu({
-    returnFocus = false
-  } = {}) {
-
-    if (!menuButton || !mobileMenu) {
+    if (!menuToggle || !mobileMenu) {
       return;
     }
 
+    menuToggle.classList.remove("is-open");
 
-    menuButton.classList.remove(
-      "is-open"
-    );
+    mobileMenu.classList.remove("is-open");
 
+    body.classList.remove("menu-open");
 
-    mobileMenu.classList.remove(
-      "is-open"
-    );
-
-
-    menuButton.setAttribute(
+    menuToggle.setAttribute(
       "aria-expanded",
       "false"
     );
 
-
-    menuButton.setAttribute(
+    menuToggle.setAttribute(
       "aria-label",
       "Open navigation"
     );
 
-
-    document.body.classList.remove(
-      "menu-open"
-    );
+  };
 
 
-    if (returnFocus) {
+  const toggleMenu = () => {
 
-      menuButton.focus();
-
+    if (!mobileMenu) {
+      return;
     }
 
-  }
+    const isOpen =
+      mobileMenu.classList.contains("is-open");
+
+    if (isOpen) {
+      closeMenu();
+    } else {
+      openMenu();
+    }
+
+  };
 
 
-  function menuIsOpen() {
+  if (menuToggle) {
 
-    return (
-      menuButton &&
-      menuButton.getAttribute(
-        "aria-expanded"
-      ) === "true"
-    );
-
-  }
-
-
-  if (
-    menuButton &&
-    mobileMenu
-  ) {
-
-    menuButton.addEventListener(
+    menuToggle.addEventListener(
       "click",
-      () => {
-
-        if (menuIsOpen()) {
-
-          closeMenu();
-
-        } else {
-
-          openMenu();
-
-        }
-
-      }
-    );
-
-
-    mobileLinks.forEach(
-      (link) => {
-
-        link.addEventListener(
-          "click",
-          () => {
-
-            closeMenu();
-
-          }
-        );
-
-      }
-    );
-
-
-    /*
-     ESC closes mobile navigation.
-    */
-
-    document.addEventListener(
-      "keydown",
-      (event) => {
-
-        if (
-          event.key === "Escape" &&
-          menuIsOpen()
-        ) {
-
-          closeMenu({
-            returnFocus: true
-          });
-
-        }
-
-      }
-    );
-
-
-    /*
-     Basic focus trap for mobile navigation.
-    */
-
-    mobileMenu.addEventListener(
-      "keydown",
-      (event) => {
-
-        if (
-          event.key !== "Tab" ||
-          !menuIsOpen()
-        ) {
-          return;
-        }
-
-
-        const focusableItems =
-          $$(
-            'a[href], button:not([disabled])',
-            mobileMenu
-          );
-
-
-        if (
-          focusableItems.length === 0
-        ) {
-          return;
-        }
-
-
-        const firstItem =
-          focusableItems[0];
-
-
-        const lastItem =
-          focusableItems[
-            focusableItems.length - 1
-          ];
-
-
-        if (
-          event.shiftKey &&
-          document.activeElement ===
-            firstItem
-        ) {
-
-          event.preventDefault();
-
-          lastItem.focus();
-
-        }
-
-
-        if (
-          !event.shiftKey &&
-          document.activeElement ===
-            lastItem
-        ) {
-
-          event.preventDefault();
-
-          firstItem.focus();
-
-        }
-
-      }
-    );
-
-
-    /*
-     Desktop resize automatically
-     resets the mobile menu.
-    */
-
-    window.addEventListener(
-      "resize",
-      () => {
-
-        if (
-          window.innerWidth > 900 &&
-          menuIsOpen()
-        ) {
-
-          closeMenu();
-
-        }
-
-      },
-      {
-        passive: true
-      }
+      toggleMenu
     );
 
   }
 
 
+  mobileLinks.forEach((link) => {
 
-  /* =========================================================
-     3. SMOOTH INTERNAL NAVIGATION
-  ========================================================= */
+    link.addEventListener(
+      "click",
+      closeMenu
+    );
 
-  const internalLinks =
-    $$('a[href^="#"]');
-
-
-  internalLinks.forEach(
-    (link) => {
-
-      link.addEventListener(
-        "click",
-        (event) => {
-
-          const targetId =
-            link.getAttribute(
-              "href"
-            );
+  });
 
 
-          if (
-            !targetId ||
-            targetId === "#"
-          ) {
-            return;
-          }
+  /* Close menu with Escape */
 
+  document.addEventListener(
+    "keydown",
+    (event) => {
 
-          const target =
-            $(targetId);
+      if (event.key === "Escape") {
 
+        closeMenu();
 
-          if (!target) {
-            return;
-          }
-
-
-          event.preventDefault();
-
-
-          target.scrollIntoView({
-            behavior:
-              prefersReducedMotion
-                ? "auto"
-                : "smooth",
-
-            block:
-              "start"
-          });
-
-
-          /*
-           Update URL hash without
-           forcing another jump.
-          */
-
-          if (
-            history.pushState
-          ) {
-
-            history.pushState(
-              null,
-              "",
-              targetId
-            );
-
-          }
-
+        if (menuToggle) {
+          menuToggle.focus();
         }
-      );
+
+      }
 
     }
   );
 
 
+  /* Close menu when moving back to desktop */
 
-  /* =========================================================
-     4. SAFE SCROLL REVEALS
+  window.addEventListener(
+    "resize",
+    () => {
 
-     IMPORTANT:
-     Nothing is hidden in the CSS by default.
+      if (window.innerWidth > 900) {
+        closeMenu();
+      }
 
-     JS hides ONLY elements that:
-     - are below the initial viewport
-     - are registered with the observer
+    }
+  );
 
-     A fallback timer makes everything
-     visible even if the observer fails.
-  ========================================================= */
 
-  const revealItems =
-    $$(".reveal");
+  /* ==========================================================
+     SMOOTH INTERNAL NAVIGATION
+  ========================================================== */
 
+  internalLinks.forEach((link) => {
+
+    link.addEventListener(
+      "click",
+      (event) => {
+
+        const href =
+          link.getAttribute("href");
+
+        if (
+          !href ||
+          href === "#" ||
+          href.length < 2
+        ) {
+          return;
+        }
+
+        const target =
+          document.querySelector(href);
+
+        if (!target) {
+          return;
+        }
+
+        event.preventDefault();
+
+        closeMenu();
+
+
+        /* Respect reduced-motion preference */
+
+        const reducedMotion =
+          window.matchMedia(
+            "(prefers-reduced-motion: reduce)"
+          ).matches;
+
+
+        target.scrollIntoView({
+          behavior:
+            reducedMotion
+              ? "auto"
+              : "smooth",
+
+          block:
+            "start"
+        });
+
+
+        /* Keep URL meaningful without page jump */
+
+        if (
+          window.history &&
+          window.history.pushState
+        ) {
+
+          window.history.pushState(
+            null,
+            "",
+            href
+          );
+
+        }
+
+      }
+    );
+
+  });
+
+
+  /* ==========================================================
+     SAFE REVEAL ANIMATIONS
+  ========================================================== */
 
   /*
-   Add additional subtle animation
-   targets without changing HTML.
+     IMPORTANT:
+     Elements are visible by default in CSS.
+
+     JavaScript only adds .reveal-pending
+     to elements that begin below the viewport.
+
+     Therefore:
+     - content does not disappear if JS fails
+     - reloads remain safe
+     - first-screen content appears immediately
   */
 
-  const workflowPills =
-    $$(".workflow-strip span");
+
+  const setupRevealAnimations = () => {
+
+    if (!revealItems.length) {
+      return;
+    }
 
 
-  workflowPills.forEach(
-    (item) => {
+    const reducedMotion =
+      window.matchMedia(
+        "(prefers-reduced-motion: reduce)"
+      ).matches;
+
+
+    if (
+      reducedMotion ||
+      !("IntersectionObserver" in window)
+    ) {
+
+      revealItems.forEach((item) => {
+
+        item.classList.remove(
+          "reveal-pending"
+        );
+
+      });
+
+      return;
+    }
+
+
+    const viewportHeight =
+      window.innerHeight;
+
+
+    revealItems.forEach((item) => {
+
+      const rect =
+        item.getBoundingClientRect();
+
+
+      /*
+         Only hide elements clearly below
+         the initial viewport.
+      */
 
       if (
-        !item.classList.contains(
-          "reveal"
-        )
+        rect.top >
+        viewportHeight * 0.88
       ) {
 
         item.classList.add(
-          "reveal"
+          "reveal-pending"
         );
 
       }
 
+    });
+
+
+    const observer =
+      new IntersectionObserver(
+        (entries, revealObserver) => {
+
+          entries.forEach((entry) => {
+
+            if (!entry.isIntersecting) {
+              return;
+            }
+
+
+            entry.target.classList.remove(
+              "reveal-pending"
+            );
+
+
+            revealObserver.unobserve(
+              entry.target
+            );
+
+          });
+
+        },
+        {
+          threshold: 0.08,
+
+          rootMargin:
+            "0px 0px -4% 0px"
+        }
+      );
+
+
+    revealItems.forEach((item) => {
+
+      if (
+        item.classList.contains(
+          "reveal-pending"
+        )
+      ) {
+
+        observer.observe(item);
+
+      }
+
+    });
+
+
+    /*
+       Safety fallback:
+       nothing remains hidden indefinitely.
+    */
+
+    window.setTimeout(
+      () => {
+
+        revealItems.forEach((item) => {
+
+          item.classList.remove(
+            "reveal-pending"
+          );
+
+        });
+
+      },
+      4000
+    );
+
+  };
+
+
+  /* ==========================================================
+     ACTIVE DESKTOP NAVIGATION
+  ========================================================== */
+
+  const desktopSectionLinks =
+    $$('.desktop-nav a[href^="#"]')
+      .filter((link) => {
+
+        const href =
+          link.getAttribute("href");
+
+        return (
+          href &&
+          href !== "#top" &&
+          document.querySelector(href)
+        );
+
+      });
+
+
+  const sections =
+    desktopSectionLinks
+      .map((link) => {
+
+        const href =
+          link.getAttribute("href");
+
+        return document.querySelector(
+          href
+        );
+
+      })
+      .filter(Boolean);
+
+
+  const updateActiveNavigation = () => {
+
+    if (!sections.length) {
+      return;
+    }
+
+
+    const headerHeight =
+      header
+        ? header.offsetHeight
+        : 0;
+
+
+    const referencePoint =
+      window.scrollY +
+      headerHeight +
+      120;
+
+
+    let activeSection =
+      null;
+
+
+    sections.forEach((section) => {
+
+      if (
+        section.offsetTop <=
+        referencePoint
+      ) {
+
+        activeSection =
+          section;
+
+      }
+
+    });
+
+
+    desktopSectionLinks.forEach(
+      (link) => {
+
+        link.removeAttribute(
+          "aria-current"
+        );
+
+      }
+    );
+
+
+    if (!activeSection) {
+      return;
+    }
+
+
+    const activeLink =
+      desktopSectionLinks.find(
+        (link) =>
+          link.getAttribute("href") ===
+          `#${activeSection.id}`
+      );
+
+
+    if (activeLink) {
+
+      activeLink.setAttribute(
+        "aria-current",
+        "true"
+      );
+
+    }
+
+  };
+
+
+  let scrollTicking =
+    false;
+
+
+  window.addEventListener(
+    "scroll",
+    () => {
+
+      if (scrollTicking) {
+        return;
+      }
+
+
+      scrollTicking =
+        true;
+
+
+      window.requestAnimationFrame(
+        () => {
+
+          updateActiveNavigation();
+
+          scrollTicking =
+            false;
+
+        }
+      );
+
+    },
+    {
+      passive: true
     }
   );
 
 
-  const allRevealItems =
-    $$(".reveal");
+  /* ==========================================================
+     EXTERNAL / DOCUMENT LINKS
+  ========================================================== */
 
+  /*
+     Resume links with target="_blank"
+     and document links with "download"
+     are intentionally NOT intercepted.
 
-  function showElement(
-    element
-  ) {
+     Browser behavior remains native:
 
-    element.classList.remove(
-      "reveal-pending"
-    );
+     View Resume
+       → opens PDF in a new tab
 
-  }
+     Download Resume
+       → downloads PDF
 
+     Portfolio Presentation
+       → downloads PPTX
+  */
 
-  function showAllElements() {
 
-    allRevealItems.forEach(
-      (element) => {
+  /* ==========================================================
+     CARD INTERACTION
+     DESKTOP POINTERS ONLY
+  ========================================================== */
 
-        showElement(
-          element
-        );
+  const projectCards =
+    $$(".project-card");
 
-      }
-    );
-
-  }
-
-
-  if (
-    prefersReducedMotion ||
-    !(
-      "IntersectionObserver"
-      in window
-    )
-  ) {
-
-    showAllElements();
-
-  } else {
-
-    /*
-     Only hide elements that begin
-     below most of the first viewport.
-     This protects the hero from
-     disappearing during page load.
-    */
-
-    allRevealItems.forEach(
-      (element) => {
-
-        const rect =
-          element
-            .getBoundingClientRect();
-
-
-        if (
-          rect.top >
-          window.innerHeight * 0.88
-        ) {
-
-          element.classList.add(
-            "reveal-pending"
-          );
-
-        }
-
-      }
-    );
-
-
-    const revealObserver =
-      new IntersectionObserver(
-        (entries) => {
-
-          entries.forEach(
-            (entry) => {
-
-              if (
-                entry.isIntersecting
-              ) {
-
-                showElement(
-                  entry.target
-                );
-
-
-                revealObserver.unobserve(
-                  entry.target
-                );
-
-              }
-
-            }
-          );
-
-        },
-        {
-          threshold:
-            0.08,
-
-          rootMargin:
-            "0px 0px -35px 0px"
-        }
-      );
-
-
-    allRevealItems.forEach(
-      (element) => {
-
-        if (
-          element.classList.contains(
-            "reveal-pending"
-          )
-        ) {
-
-          revealObserver.observe(
-            element
-          );
-
-        }
-
-      }
-    );
-
-
-    /*
-     Safety fallback:
-     even if observer behavior fails,
-     nothing can remain hidden.
-    */
-
-    window.setTimeout(
-      showAllElements,
-      2200
-    );
-
-  }
-
-
-
-  /* =========================================================
-     5. STAGGERED PROJECT CARD ANIMATION
-  ========================================================= */
-
-  if (
-    !prefersReducedMotion
-  ) {
-
-    const projectCards =
-      $$(".project-card");
-
-
-    projectCards.forEach(
-      (card, index) => {
-
-        const delay =
-          Math.min(
-            index * 55,
-            220
-          );
-
-
-        card.style.transitionDelay =
-          `${delay}ms`;
-
-      }
-    );
-
-
-    /*
-     Metrics reveal slightly after
-     the containing card.
-    */
-
-    const metricBlocks =
-      $$(".metric-block");
-
-
-    metricBlocks.forEach(
-      (metric, index) => {
-
-        const delay =
-          (
-            index % 3
-          ) * 55;
-
-
-        metric.style.transitionDelay =
-          `${delay}ms`;
-
-      }
-    );
-
-
-    /*
-     DMAIC sequence receives a
-     restrained cascading reveal.
-    */
-
-    const methodSteps =
-      $$(".method-step");
-
-
-    methodSteps.forEach(
-      (step, index) => {
-
-        step.style.transitionDelay =
-          `${Math.min(
-            index * 45,
-            225
-          )}ms`;
-
-      }
-    );
-
-
-    /*
-     Credential cards.
-    */
-
-    const credentials =
-      $$(".credential");
-
-
-    credentials.forEach(
-      (credential, index) => {
-
-        credential.style.transitionDelay =
-          `${Math.min(
-            index * 50,
-            180
-          )}ms`;
-
-      }
-    );
-
-
-    /*
-     CME workflow pills.
-    */
-
-    workflowPills.forEach(
-      (pill, index) => {
-
-        pill.style.transitionDelay =
-          `${Math.min(
-            index * 32,
-            190
-          )}ms`;
-
-      }
-    );
-
-  }
-
-
-
-  /* =========================================================
-     6. ACTIVE NAVIGATION SECTION
-  ========================================================= */
-
-  const navigationLinks =
-    $$(
-      '.desktop-nav a[href^="#"], ' +
-      '.mobile-menu a[href^="#"]'
-    );
-
-
-  const trackedSections =
-    $$(
-      "#work, " +
-      "#approach, " +
-      "#about, " +
-      "#credentials"
-    );
-
-
-  function updateActiveNavigation(
-    sectionId
-  ) {
-
-    navigationLinks.forEach(
-      (link) => {
-
-        const href =
-          link.getAttribute(
-            "href"
-          );
-
-
-        if (
-          href ===
-          `#${sectionId}`
-        ) {
-
-          link.setAttribute(
-            "aria-current",
-            "true"
-          );
-
-        } else {
-
-          link.removeAttribute(
-            "aria-current"
-          );
-
-        }
-
-      }
-    );
-
-  }
-
-
-  if (
-    "IntersectionObserver"
-      in window &&
-    trackedSections.length
-  ) {
-
-    const sectionObserver =
-      new IntersectionObserver(
-        (entries) => {
-
-          const visibleEntries =
-            entries
-              .filter(
-                (entry) =>
-                  entry.isIntersecting
-              )
-              .sort(
-                (a, b) =>
-                  b.intersectionRatio -
-                  a.intersectionRatio
-              );
-
-
-          if (
-            visibleEntries.length
-          ) {
-
-            updateActiveNavigation(
-              visibleEntries[0]
-                .target
-                .id
-            );
-
-          }
-
-        },
-        {
-          rootMargin:
-            "-28% 0px -58% 0px",
-
-          threshold:
-            [
-              0,
-              0.15,
-              0.3,
-              0.5
-            ]
-        }
-      );
-
-
-    trackedSections.forEach(
-      (section) => {
-
-        sectionObserver.observe(
-          section
-        );
-
-      }
-    );
-
-  }
-
-
-
-  /* =========================================================
-     7. DESKTOP CARD POINTER EFFECT
-
-     Very restrained.
-     Only enabled on devices that have:
-     - a mouse / precise pointer
-     - hover capability
-
-     No effect on mobile or tablet touch.
-  ========================================================= */
 
   const supportsHover =
     window.matchMedia(
@@ -823,138 +576,190 @@ document.addEventListener("DOMContentLoaded", () => {
     ).matches;
 
 
-  if (
-    supportsHover &&
-    !prefersReducedMotion
-  ) {
+  if (supportsHover) {
 
-    const cards =
-      $$(".project-card");
+    projectCards.forEach((card) => {
 
+      card.addEventListener(
+        "mousemove",
+        (event) => {
 
-    cards.forEach(
-      (card) => {
-
-        card.addEventListener(
-          "pointermove",
-          (event) => {
-
-            const rect =
-              card.getBoundingClientRect();
+          const rect =
+            card.getBoundingClientRect();
 
 
-            const x =
-              (
-                event.clientX -
-                rect.left
-              ) /
-              rect.width;
+          const x =
+            event.clientX -
+            rect.left;
 
 
-            const y =
-              (
-                event.clientY -
-                rect.top
-              ) /
-              rect.height;
+          const y =
+            event.clientY -
+            rect.top;
 
 
-            /*
-             Extremely subtle perspective.
-             CSS hover still controls
-             primary card movement.
-            */
-
-            const rotateX =
-              (
-                0.5 - y
-              ) * 1.2;
+          card.style.setProperty(
+            "--pointer-x",
+            `${x}px`
+          );
 
 
-            const rotateY =
-              (
-                x - 0.5
-              ) * 1.2;
+          card.style.setProperty(
+            "--pointer-y",
+            `${y}px`
+          );
+
+        }
+      );
 
 
-            card.style.transform =
-              `
-                translateY(-6px)
-                perspective(900px)
-                rotateX(${rotateX}deg)
-                rotateY(${rotateY}deg)
-              `;
+      card.addEventListener(
+        "mouseleave",
+        () => {
 
-          }
-        );
+          card.style.removeProperty(
+            "--pointer-x"
+          );
 
+          card.style.removeProperty(
+            "--pointer-y"
+          );
 
-        card.addEventListener(
-          "pointerleave",
-          () => {
+        }
+      );
 
-            card.style.transform =
-              "";
-
-          }
-        );
-
-      }
-    );
+    });
 
   }
 
 
+  /* ==========================================================
+     HASH NAVIGATION ON INITIAL LOAD
+  ========================================================== */
 
-  /* =========================================================
-     8. PAGE VISIBILITY SAFETY
+  const scrollToInitialHash = () => {
 
-     Handles browser back/forward cache,
-     mobile tab restore and similar cases.
-  ========================================================= */
+    const hash =
+      window.location.hash;
+
+
+    if (
+      !hash ||
+      hash === "#"
+    ) {
+      return;
+    }
+
+
+    const target =
+      document.querySelector(hash);
+
+
+    if (!target) {
+      return;
+    }
+
+
+    /*
+       Browser may already have jumped.
+       This corrects position after fonts/layout load.
+    */
+
+    window.setTimeout(
+      () => {
+
+        target.scrollIntoView({
+          behavior: "auto",
+          block: "start"
+        });
+
+      },
+      80
+    );
+
+  };
+
+
+  /* ==========================================================
+     PAGE RESTORE SAFETY
+  ========================================================== */
 
   window.addEventListener(
     "pageshow",
     () => {
 
       /*
-       Hero content should always
-       remain immediately visible.
+         Safari / mobile browsers can restore
+         a page from cache with old animation states.
       */
 
-      const heroReveal =
-        $$(".hero .reveal");
+      revealItems.forEach((item) => {
+
+        const rect =
+          item.getBoundingClientRect();
 
 
-      heroReveal.forEach(
-        (element) => {
+        if (
+          rect.top <
+          window.innerHeight
+        ) {
 
-          element.classList.remove(
+          item.classList.remove(
             "reveal-pending"
           );
 
         }
-      );
+
+      });
+
+
+      updateActiveNavigation();
 
     }
   );
 
 
+  /* ==========================================================
+     INITIALIZATION
+  ========================================================== */
 
-  /* =========================================================
-     9. CURRENT YEAR
-  ========================================================= */
+  const init = () => {
 
-  const year =
-    $("#year");
+    closeMenu();
+
+    setupRevealAnimations();
+
+    updateActiveNavigation();
+
+    scrollToInitialHash();
+
+  };
 
 
-  if (year) {
+  /*
+     Script is currently placed immediately
+     before </body>, so DOM is normally ready.
+     This guard also makes the file safe if
+     you later move it into <head>.
+  */
 
-    year.textContent =
-      new Date()
-        .getFullYear();
+  if (
+    document.readyState ===
+    "loading"
+  ) {
+
+    document.addEventListener(
+      "DOMContentLoaded",
+      init,
+      {
+        once: true
+      }
+    );
+
+  } else {
+
+    init();
 
   }
 
-});
+})();
