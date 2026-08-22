@@ -1,8 +1,8 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-  // =========================
-  // MOBILE NAVIGATION
-  // =========================
+  /* ==================================================
+     MOBILE NAVIGATION
+  ================================================== */
 
   const menuButton =
     document.querySelector(".menu-toggle");
@@ -14,58 +14,76 @@ document.addEventListener("DOMContentLoaded", () => {
     document.querySelectorAll(".mobile-menu a");
 
 
-  const closeMenu = () => {
+  function closeMenu() {
 
     if (!menuButton || !mobileMenu) {
       return;
     }
 
-    menuButton.classList.remove("is-open");
 
-    mobileMenu.classList.remove("is-open");
+    menuButton.classList.remove(
+      "is-open"
+    );
+
+
+    mobileMenu.classList.remove(
+      "is-open"
+    );
+
 
     menuButton.setAttribute(
       "aria-expanded",
       "false"
     );
 
+
     menuButton.setAttribute(
       "aria-label",
       "Open navigation"
     );
 
+
     document.body.classList.remove(
       "menu-open"
     );
 
-  };
+  }
 
 
-  const openMenu = () => {
+  function openMenu() {
 
     if (!menuButton || !mobileMenu) {
       return;
     }
 
-    menuButton.classList.add("is-open");
 
-    mobileMenu.classList.add("is-open");
+    menuButton.classList.add(
+      "is-open"
+    );
+
+
+    mobileMenu.classList.add(
+      "is-open"
+    );
+
 
     menuButton.setAttribute(
       "aria-expanded",
       "true"
     );
 
+
     menuButton.setAttribute(
       "aria-label",
       "Close navigation"
     );
 
+
     document.body.classList.add(
       "menu-open"
     );
 
-  };
+  }
 
 
   if (menuButton && mobileMenu) {
@@ -78,6 +96,7 @@ document.addEventListener("DOMContentLoaded", () => {
           menuButton.getAttribute(
             "aria-expanded"
           ) === "true";
+
 
         if (isOpen) {
           closeMenu();
@@ -101,18 +120,6 @@ document.addEventListener("DOMContentLoaded", () => {
     );
 
 
-    window.addEventListener(
-      "resize",
-      () => {
-
-        if (window.innerWidth > 900) {
-          closeMenu();
-        }
-
-      }
-    );
-
-
     document.addEventListener(
       "keydown",
       (event) => {
@@ -124,69 +131,111 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     );
 
-  }
 
+    window.addEventListener(
+      "resize",
+      () => {
 
-  // =========================
-  // SMOOTH INTERNAL SCROLL
-  // =========================
-
-  document
-    .querySelectorAll('a[href^="#"]')
-    .forEach(
-      (link) => {
-
-        link.addEventListener(
-          "click",
-          (event) => {
-
-            const targetId =
-              link.getAttribute("href");
-
-
-            if (
-              !targetId ||
-              targetId === "#"
-            ) {
-              return;
-            }
-
-
-            const target =
-              document.querySelector(
-                targetId
-              );
-
-
-            if (!target) {
-              return;
-            }
-
-
-            event.preventDefault();
-
-
-            target.scrollIntoView({
-              behavior: "smooth",
-              block: "start",
-            });
-
-          }
-        );
+        if (window.innerWidth > 900) {
+          closeMenu();
+        }
 
       }
     );
 
+  }
 
-  // =========================
-  // SCROLL REVEAL
-  // =========================
+
+
+  /* ==================================================
+     SMOOTH INTERNAL LINKS
+  ================================================== */
+
+  const internalLinks =
+    document.querySelectorAll(
+      'a[href^="#"]'
+    );
+
+
+  internalLinks.forEach(
+    (link) => {
+
+      link.addEventListener(
+        "click",
+        (event) => {
+
+          const targetId =
+            link.getAttribute("href");
+
+
+          if (
+            !targetId ||
+            targetId === "#"
+          ) {
+            return;
+          }
+
+
+          const target =
+            document.querySelector(
+              targetId
+            );
+
+
+          if (!target) {
+            return;
+          }
+
+
+          event.preventDefault();
+
+
+          target.scrollIntoView({
+            behavior: "smooth",
+            block: "start",
+          });
+
+        }
+      );
+
+    }
+  );
+
+
+
+  /* ==================================================
+     SAFE SCROLL REVEAL
+
+     IMPORTANT:
+     The page is visible by default.
+
+     JavaScript only hides elements that are safely
+     below the initial viewport.
+
+     Therefore:
+     - if JS fails, page stays visible
+     - if JS is cached incorrectly, page stays visible
+     - first screen never disappears
+  ================================================== */
+
+  const prefersReducedMotion =
+    window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+
 
   const revealItems =
-    document.querySelectorAll(".reveal");
+    Array.from(
+      document.querySelectorAll(
+        ".reveal"
+      )
+    );
 
 
-  if ("IntersectionObserver" in window) {
+  if (
+    !prefersReducedMotion &&
+    "IntersectionObserver" in window
+  ) {
 
     const revealObserver =
       new IntersectionObserver(
@@ -195,11 +244,15 @@ document.addEventListener("DOMContentLoaded", () => {
           entries.forEach(
             (entry) => {
 
-              if (entry.isIntersecting) {
+              if (
+                entry.isIntersecting
+              ) {
 
                 entry.target
                   .classList
-                  .add("is-visible");
+                  .remove(
+                    "reveal-pending"
+                  );
 
 
                 revealObserver
@@ -214,10 +267,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
         },
         {
-          threshold: 0.1,
+          threshold: 0.08,
 
           rootMargin:
-            "0px 0px -30px 0px",
+            "0px 0px -25px 0px",
         }
       );
 
@@ -225,19 +278,30 @@ document.addEventListener("DOMContentLoaded", () => {
     revealItems.forEach(
       (item) => {
 
-        revealObserver.observe(item);
+        const rect =
+          item.getBoundingClientRect();
 
-      }
-    );
 
-  } else {
+        /*
+         Only animate content that starts
+         below the visible first screen.
+        */
 
-    revealItems.forEach(
-      (item) => {
+        if (
+          rect.top >
+          window.innerHeight * 0.9
+        ) {
 
-        item.classList.add(
-          "is-visible"
-        );
+          item.classList.add(
+            "reveal-pending"
+          );
+
+
+          revealObserver.observe(
+            item
+          );
+
+        }
 
       }
     );
@@ -245,12 +309,15 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
 
-  // =========================
-  // CURRENT YEAR
-  // =========================
+
+  /* ==================================================
+     CURRENT YEAR
+  ================================================== */
 
   const year =
-    document.getElementById("year");
+    document.getElementById(
+      "year"
+    );
 
 
   if (year) {
