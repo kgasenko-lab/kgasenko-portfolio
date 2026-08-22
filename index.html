@@ -10,75 +10,146 @@
 
   <meta
     name="description"
-    content="Kseniia Gasenko — Business Transformation, Change Management, Systems Improvement and Process Design portfolio."
+    content="Kseniia Gasenko — Business Transformation, Change Management, Process Improvement and Business Systems portfolio."
   >
 
-  <title>Kseniia Gasenko | Business Transformation & Change</title>
+  <title>
+    Kseniia Gasenko | Business Transformation & Change
+  </title>
 
-  <!-- Main stylesheet -->
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-  <!-- =========================
-       HEADER
-  ========================== -->
+  <!-- HEADER -->
+  <header class="site-header" id="site-header">
 
-  <header class="site-header">
-    <div class="container nav">
-
-      <a class="brand" href="#top">
-        Kseniia Gasenko
-      </a>
-
-      <nav
-        class="nav-links"
-        aria-label="Primary navigation"
-      >
-        <a href="#work">Work</a>
-        <a href="#approach">Approach</a>
-        <a href="#about">About</a>
-        <a href="#credentials">Credentials</a>
-      </nav>
+    <div class="container nav-shell">
 
       <a
-        class="nav-cta"
-        href="mailto:kgasenko@gmail.com"
+        class="brand"
+        href="#top"
+        aria-label="Kseniia Gasenko home"
       >
-        Contact
+        <span class="brand-mark">
+          KG
+        </span>
+
+        <span class="brand-name">
+          Kseniia Gasenko
+        </span>
       </a>
 
+
+      <!-- DESKTOP NAVIGATION -->
+      <nav
+        class="desktop-nav"
+        aria-label="Primary navigation"
+      >
+        <a href="#work">
+          Work
+        </a>
+
+        <a href="#approach">
+          Approach
+        </a>
+
+        <a href="#about">
+          About
+        </a>
+
+        <a href="#credentials">
+          Credentials
+        </a>
+
+        <a
+          class="nav-contact"
+          href="mailto:kgasenko@gmail.com"
+        >
+          Contact
+        </a>
+      </nav>
+
+
+      <!-- MOBILE MENU BUTTON -->
+      <button
+        class="menu-toggle"
+        type="button"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+        aria-label="Open navigation"
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
     </div>
+
+
+    <!-- MOBILE NAVIGATION -->
+    <nav
+      class="mobile-menu"
+      id="mobile-menu"
+      aria-label="Mobile navigation"
+    >
+
+      <div class="container mobile-menu-inner">
+
+        <a href="#work">
+          Work
+        </a>
+
+        <a href="#approach">
+          Approach
+        </a>
+
+        <a href="#about">
+          About
+        </a>
+
+        <a href="#credentials">
+          Credentials
+        </a>
+
+        <a href="mailto:kgasenko@gmail.com">
+          Contact
+        </a>
+
+      </div>
+
+    </nav>
+
   </header>
 
 
-  <!-- =========================
-       MAIN
-  ========================== -->
 
   <main id="top">
 
 
-    <!-- =========================
-         HERO
-    ========================== -->
-
+    <!-- HERO -->
     <section class="hero">
 
       <div class="container hero-grid">
 
-        <div class="reveal">
 
-          <div class="eyebrow">
+        <div class="hero-copy reveal">
+
+          <p class="eyebrow">
             Business Transformation · Change · Systems
-          </div>
+          </p>
 
           <h1>
-            I find what is
-            <span class="accent">really</span>
-            slowing the business down.
+            <span class="headline-line">
+              I find what is really
+            </span>
+
+            <span class="headline-line">
+              slowing the business down.
+            </span>
           </h1>
+
 
           <p class="hero-lead">
             I analyze how people, processes, data and systems work together,
@@ -86,17 +157,18 @@
             the requested solution.
           </p>
 
+
           <div class="hero-actions">
 
             <a
-              class="button-primary"
+              class="button button-primary"
               href="#work"
             >
               View case studies
             </a>
 
             <a
-              class="button-secondary"
+              class="button button-secondary"
               href="#approach"
             >
               How I work
@@ -107,16 +179,73 @@
         </div>
 
 
-        <aside class="hero-note reveal">
 
-          <div class="hero-note-label">
-            My focus
-          </div>
+        <!-- TRANSFORMATION LENS -->
+        <aside
+          class="hero-panel reveal"
+          aria-label="Transformation focus"
+        >
 
-          <p>
-            Business transformation, technology adoption, process improvement,
-            data-informed decisions and practical change implementation.
+          <p class="panel-label">
+            Transformation lens
           </p>
+
+
+          <div class="lens-list">
+
+            <div class="lens-item">
+
+              <span>
+                01
+              </span>
+
+              <p>
+                What is the visible problem?
+              </p>
+
+            </div>
+
+
+            <div class="lens-item">
+
+              <span>
+                02
+              </span>
+
+              <p>
+                What is actually causing it?
+              </p>
+
+            </div>
+
+
+            <div class="lens-item">
+
+              <span>
+                03
+              </span>
+
+              <p>
+                What must change in behavior,
+                process or system?
+              </p>
+
+            </div>
+
+
+            <div class="lens-item">
+
+              <span>
+                04
+              </span>
+
+              <p>
+                Did the change create measurable value?
+              </p>
+
+            </div>
+
+          </div>
 
         </aside>
 
@@ -125,35 +254,31 @@
     </section>
 
 
-    <!-- =========================
-         APPROACH / DMAIC + RESULTS
-    ========================== -->
 
+    <!-- WORK -->
     <section
       class="section section-border"
-      id="approach"
+      id="work"
     >
 
       <div class="container">
 
+
         <div class="section-heading reveal">
 
-          <div class="section-kicker">
-            My approach
-          </div>
+          <p class="section-kicker">
+            Selected work
+          </p>
 
-          <div>
+          <div class="section-heading-copy">
 
             <h2>
-              Start with the problem.
-              Prove the cause.
-              Change what matters.
+              From visible problem to underlying cause to measurable change.
             </h2>
 
             <p>
-              My project logic is based on Lean Six Sigma DMAIC,
-              adapted for business transformation so the process remains
-              clear to any hiring manager or client.
+              Five transformation stories across staffing,
+              healthcare events, consulting, education and hospitality.
             </p>
 
           </div>
@@ -161,14 +286,500 @@
         </div>
 
 
+
+        <div class="work-grid">
+
+
+          <!-- STAFFING AGENCY -->
+          <article
+            class="project-card project-featured reveal"
+          >
+
+            <div class="project-card-head">
+
+              <span class="project-number">
+                01
+              </span>
+
+              <span class="project-tag">
+                Business + Recruiting Transformation
+              </span>
+
+            </div>
+
+
+            <div class="project-content">
+
+
+              <div>
+
+                <h3>
+                  Staffing Agency
+                </h3>
+
+                <p class="project-problem">
+                  A one-person staffing agency needed to grow,
+                  but had no marketing function, an inefficient
+                  recruiting system, limited candidate acquisition
+                  and processes that could not scale.
+                </p>
+
+                <p class="project-change">
+                  Built the recruiting technology,
+                  candidate-acquisition, reporting and operating
+                  infrastructure needed to support growth.
+                </p>
+
+              </div>
+
+
+              <div class="project-impact">
+
+                <div class="metric-block">
+
+                  <strong>
+                    2–3×
+                  </strong>
+
+                  <span>
+                    candidate volume with limited promotion
+                  </span>
+
+                </div>
+
+
+                <div class="metric-block">
+
+                  <strong>
+                    20K+
+                  </strong>
+
+                  <span>
+                    candidate database
+                  </span>
+
+                </div>
+
+
+                <div class="metric-block">
+
+                  <strong>
+                    Hours → minutes
+                  </strong>
+
+                  <span>
+                    for selected database sourcing workflows
+                  </span>
+
+                </div>
+
+              </div>
+
+            </div>
+
+
+            <a
+              class="case-link"
+              href="staffing-agency.html"
+            >
+              View case study
+
+              <span>
+                →
+              </span>
+            </a>
+
+          </article>
+
+
+
+          <!-- CME AGENCY -->
+          <article class="project-card reveal">
+
+            <div class="project-card-head">
+
+              <span class="project-number">
+                02
+              </span>
+
+              <span class="project-tag">
+                Event Operations Digitization
+              </span>
+
+            </div>
+
+
+            <div class="project-content">
+
+
+              <div>
+
+                <h3>
+                  CME / Healthcare Marketing Agency
+                </h3>
+
+                <p class="project-problem">
+                  CME events depended on physical clinic outreach,
+                  manually distributed invitations, paper registration
+                  and repeated manual data entry.
+                </p>
+
+                <p class="project-change">
+                  Introduced landing pages, online registration,
+                  digital promotion and structured participant data
+                  to reduce manual work and expand reach.
+                </p>
+
+              </div>
+
+
+              <div class="project-impact">
+
+                <div class="metric-block">
+
+                  <strong>
+                    4K → 45K+
+                  </strong>
+
+                  <span>
+                    healthcare professional database growth
+                    across the broader digital journey
+                  </span>
+
+                </div>
+
+              </div>
+
+            </div>
+
+
+            <a
+              class="case-link"
+              href="cme-agency.html"
+            >
+              View case study
+
+              <span>
+                →
+              </span>
+            </a>
+
+          </article>
+
+
+
+          <!-- DIGITAL TRANSFORMATION CONSULTING -->
+          <article class="project-card reveal">
+
+            <div class="project-card-head">
+
+              <span class="project-number">
+                03
+              </span>
+
+              <span class="project-tag">
+                Digital Transformation Consulting
+              </span>
+
+            </div>
+
+
+            <div class="project-content">
+
+
+              <div>
+
+                <h3>
+                  Independent CME Systems Consulting
+                </h3>
+
+                <p class="project-problem">
+                  Healthcare organizations needed a practical way
+                  to move CME programs online without expensive
+                  platform dependency or fragmented manual workflows.
+                </p>
+
+                <p class="project-change">
+                  Designed low-cost end-to-end systems for a primary
+                  healthcare marketing client and at least three
+                  additional independent CME projects using similar
+                  reusable workflows.
+                </p>
+
+              </div>
+
+
+              <div class="project-impact">
+
+                <div class="metric-block">
+
+                  <strong>
+                    100–500 → 1K–4K
+                  </strong>
+
+                  <span>
+                    participants at one time
+                  </span>
+
+                </div>
+
+
+                <div class="metric-block">
+
+                  <strong>
+                    End-to-end
+                  </strong>
+
+                  <span>
+                    registration → access → broadcast → testing →
+                    certification → recordings → reporting
+                  </span>
+
+                </div>
+
+              </div>
+
+            </div>
+
+
+            <a
+              class="case-link"
+              href="cme-consulting.html"
+            >
+              View case study
+
+              <span>
+                →
+              </span>
+            </a>
+
+          </article>
+
+
+
+          <!-- MUSIC SCHOOL -->
+          <article class="project-card reveal">
+
+            <div class="project-card-head">
+
+              <span class="project-number">
+                04
+              </span>
+
+              <span class="project-tag">
+                Enrollment + Operations Transformation
+              </span>
+
+            </div>
+
+
+            <div class="project-content">
+
+
+              <div>
+
+                <h3>
+                  Music School
+                </h3>
+
+                <p class="project-problem">
+                  The owner wanted school-management software
+                  to reduce manual administration.
+                  Analysis showed the more immediate constraint
+                  was revenue and lead generation.
+                </p>
+
+                <p class="project-change">
+                  Reprioritized the work around program positioning,
+                  website experience, schedules, pricing, enrollment
+                  and marketing before moving into software selection
+                  and implementation.
+                </p>
+
+              </div>
+
+
+              <div class="project-impact">
+
+                <div class="metric-block">
+
+                  <strong>
+                    ~4×
+                  </strong>
+
+                  <span>
+                    first-month registrations and revenue
+                    vs. the same period prior year
+                  </span>
+
+                </div>
+
+
+                <div class="metric-block">
+
+                  <strong>
+                    5 systems
+                  </strong>
+
+                  <span>
+                    shortlisted for hands-on workflow testing
+                  </span>
+
+                </div>
+
+              </div>
+
+            </div>
+
+
+            <a
+              class="case-link"
+              href="music-school.html"
+            >
+              View case study
+
+              <span>
+                →
+              </span>
+            </a>
+
+          </article>
+
+
+
+          <!-- HOTEL -->
+          <article class="project-card reveal">
+
+            <div class="project-card-head">
+
+              <span class="project-number">
+                05
+              </span>
+
+              <span class="project-tag">
+                Operating Model Redesign
+              </span>
+
+            </div>
+
+
+            <div class="project-content">
+
+
+              <div>
+
+                <h3>
+                  Hotel Complex
+                </h3>
+
+                <p class="project-problem">
+                  Low event-service sales looked like a sales problem.
+                  The deeper issue was fragmented customer ownership,
+                  decision fatigue and staff schedules that did not
+                  match customer behavior.
+                </p>
+
+                <p class="project-change">
+                  Redesigned roles, service coverage and incentives
+                  around one-point customer ownership and a
+                  3-days-on / 3-days-off rotation.
+                </p>
+
+              </div>
+
+
+              <div class="project-impact">
+
+                <div class="metric-block">
+
+                  <strong>
+                    ~90%
+                  </strong>
+
+                  <span>
+                    banquet events using internal event services
+                  </span>
+
+                </div>
+
+
+                <div class="metric-block">
+
+                  <strong>
+                    ~4–6×
+                  </strong>
+
+                  <span>
+                    monthly vendor-fee revenue
+                  </span>
+
+                </div>
+
+              </div>
+
+            </div>
+
+
+            <a
+              class="case-link"
+              href="hotel.html"
+            >
+              View case study
+
+              <span>
+                →
+              </span>
+            </a>
+
+          </article>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- APPROACH -->
+    <section
+      class="section section-border"
+      id="approach"
+    >
+
+      <div class="container">
+
+
+        <div class="section-heading reveal">
+
+          <p class="section-kicker">
+            My approach
+          </p>
+
+          <div class="section-heading-copy">
+
+            <h2>
+              Diagnose first. Change second.
+            </h2>
+
+            <p>
+              I structure case studies using DMAIC logic,
+              with Results separated so the business impact
+              is easy to scan.
+            </p>
+
+          </div>
+
+        </div>
+
+
+
         <div class="method-grid">
 
 
-          <!-- DEFINE -->
-
           <article class="method-step reveal">
 
-            <span class="method-code">
+            <span>
               D · DEFINE
             </span>
 
@@ -177,18 +788,16 @@
             </h3>
 
             <p>
-              Clarify the business need, starting process
-              and expected outcome.
+              Clarify the visible business need,
+              starting condition and expected outcome.
             </p>
 
           </article>
 
 
-          <!-- MEASURE -->
-
           <article class="method-step reveal">
 
-            <span class="method-code">
+            <span>
               M · MEASURE
             </span>
 
@@ -197,18 +806,18 @@
             </h3>
 
             <p>
-              Look at volume, time, cost, errors,
-              workload, conversion and constraints.
+              Measure volume, time, cost, conversion,
+              errors, workload and constraints.
             </p>
 
           </article>
 
 
-          <!-- ANALYZE -->
+          <article
+            class="method-step method-emphasis reveal"
+          >
 
-          <article class="method-step reveal">
-
-            <span class="method-code">
+            <span>
               A · ANALYZE
             </span>
 
@@ -217,18 +826,17 @@
             </h3>
 
             <p>
-              Find the root cause, including behavior,
-              system gaps and process friction.
+              Find the root cause—including behavior,
+              handoffs, incentives, system gaps
+              and process friction.
             </p>
 
           </article>
 
 
-          <!-- IMPROVE -->
-
           <article class="method-step reveal">
 
-            <span class="method-code">
+            <span>
               I · IMPROVE
             </span>
 
@@ -238,17 +846,16 @@
 
             <p>
               Redesign the process, system,
-              customer journey or operating model.
+              customer journey, operating model
+              or decision logic.
             </p>
 
           </article>
 
 
-          <!-- CONTROL -->
-
           <article class="method-step reveal">
 
-            <span class="method-code">
+            <span>
               C · CONTROL
             </span>
 
@@ -257,18 +864,17 @@
             </h3>
 
             <p>
-              Standardize the new way of working
-              through systems, reporting and adoption.
+              Make the improved workflow repeatable
+              through systems, reporting, standards
+              and adoption.
             </p>
 
           </article>
 
 
-          <!-- RESULTS -->
-
           <article class="method-step reveal">
 
-            <span class="method-code">
+            <span>
               R · RESULTS
             </span>
 
@@ -277,8 +883,9 @@
             </h3>
 
             <p>
-              Show what changed in measurable
-              business terms.
+              Show the measurable effect on growth,
+              efficiency, quality, cost,
+              capacity or adoption.
             </p>
 
           </article>
@@ -290,424 +897,103 @@
     </section>
 
 
-    <!-- =========================
-         SELECTED WORK
-    ========================== -->
 
-    <section
-      class="section section-border"
-      id="work"
-    >
-
-      <div class="container">
-
-        <div class="section-heading reveal">
-
-          <div class="section-kicker">
-            Selected work
-          </div>
-
-          <div>
-
-            <h2>
-              Four transformations.
-              One way of thinking.
-            </h2>
-
-            <p>
-              Each case study shows the initial business condition,
-              the root cause I identified, the change I implemented
-              and the measurable result.
-            </p>
-
-          </div>
-
-        </div>
-
-
-        <div class="work-grid">
-
-
-          <!-- =====================
-               TBEST
-          ====================== -->
-
-          <a
-            class="project-card reveal"
-            href="tbest.html"
-          >
-
-            <div>
-
-              <div class="project-top">
-
-                <span class="project-number">
-                  01
-                </span>
-
-                <span class="project-status">
-                  Systems + Growth
-                </span>
-
-              </div>
-
-
-              <h3>
-                TBest Services
-              </h3>
-
-              <p>
-                Recruiting and business systems transformation built around
-                candidate acquisition, hiring feasibility, data visibility
-                and team adoption.
-              </p>
-
-            </div>
-
-
-            <div>
-
-              <div class="metric-row">
-
-                <div class="metric">
-                  2–3×
-                </div>
-
-                <div class="metric-caption">
-                  candidate volume with limited promotion
-                </div>
-
-              </div>
-
-
-              <div class="case-link">
-                View transformation
-                <span>→</span>
-              </div>
-
-            </div>
-
-          </a>
-
-
-          <!-- =====================
-               CME
-          ====================== -->
-
-          <a
-            class="project-card reveal"
-            href="cme.html"
-          >
-
-            <div>
-
-              <div class="project-top">
-
-                <span class="project-number">
-                  02
-                </span>
-
-                <span class="project-status">
-                  Digital Transformation
-                </span>
-
-              </div>
-
-
-              <h3>
-                CME / Healthcare Events
-              </h3>
-
-              <p>
-                Moved a manual, geographically limited event model
-                into a low-cost digital ecosystem for registration,
-                delivery, testing and certification.
-              </p>
-
-            </div>
-
-
-            <div>
-
-              <div class="metric-row">
-
-                <div class="metric">
-                  1K–4K
-                </div>
-
-                <div class="metric-caption">
-                  participants at one time vs. roughly 100–500 before
-                </div>
-
-              </div>
-
-
-              <div class="case-link">
-                View transformation
-                <span>→</span>
-              </div>
-
-            </div>
-
-          </a>
-
-
-          <!-- =====================
-               OLENKA
-          ====================== -->
-
-          <a
-            class="project-card reveal"
-            href="olenka.html"
-          >
-
-            <div>
-
-              <div class="project-top">
-
-                <span class="project-number">
-                  03
-                </span>
-
-                <span class="project-status">
-                  Revenue + Operations
-                </span>
-
-              </div>
-
-
-              <h3>
-                Olenka School of Music
-              </h3>
-
-              <p>
-                Reprioritized the transformation around lead generation
-                and enrollment first, then moved into school-management
-                system selection and implementation.
-              </p>
-
-            </div>
-
-
-            <div>
-
-              <div class="metric-row">
-
-                <div class="metric">
-                  ~4×
-                </div>
-
-                <div class="metric-caption">
-                  first-month registrations and revenue vs. same period prior year
-                </div>
-
-              </div>
-
-
-              <div class="case-link">
-                View transformation
-                <span>→</span>
-              </div>
-
-            </div>
-
-          </a>
-
-
-          <!-- =====================
-               HOTEL
-          ====================== -->
-
-          <a
-            class="project-card reveal"
-            href="hotel.html"
-          >
-
-            <div>
-
-              <div class="project-top">
-
-                <span class="project-number">
-                  04
-                </span>
-
-                <span class="project-status">
-                  Operating Model
-                </span>
-
-              </div>
-
-
-              <h3>
-                Hotel Complex
-              </h3>
-
-              <p>
-                Redesigned roles, service coverage and incentives after
-                identifying fragmented ownership, decision fatigue and
-                schedule mismatch with customer behavior.
-              </p>
-
-            </div>
-
-
-            <div>
-
-              <div class="metric-row">
-
-                <div class="metric">
-                  ~90%
-                </div>
-
-                <div class="metric-caption">
-                  banquet events using internal event services
-                </div>
-
-              </div>
-
-
-              <div class="case-link">
-                View transformation
-                <span>→</span>
-              </div>
-
-            </div>
-
-          </a>
-
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- =========================
-         HOW I WORK / DISC
-    ========================== -->
-
+    <!-- ABOUT -->
     <section
       class="section section-border"
       id="about"
     >
 
-      <div class="container">
+      <div class="container about-grid">
 
-        <div class="section-heading reveal">
 
-          <div class="section-kicker">
+        <div class="about-copy reveal">
+
+          <p class="section-kicker">
             How I work
-          </div>
+          </p>
 
-          <div>
+          <h2>
+            Behavior + systems + measurable change.
+          </h2>
 
-            <h2>
-              Behavior + systems + measurable change.
-            </h2>
+          <p>
+            I pay attention to how people actually behave inside
+            a process: where customers stop, where employees bypass
+            a workflow, where handoffs fail and where a system adds
+            friction instead of removing it.
+          </p>
 
-          </div>
+          <p>
+            That perspective has shaped my work across customer
+            journeys, marketing, recruiting systems, digital event
+            ecosystems, operations and technology adoption.
+          </p>
 
         </div>
 
 
-        <div class="about-grid">
+
+        <aside class="work-style reveal">
+
+          <span class="disc-badge">
+            DISC · DC
+          </span>
+
+          <h3>
+            Analytical.
+            Decisive.
+            Improvement-focused.
+          </h3>
+
+          <p>
+            I tend to question inefficient processes,
+            test assumptions, look for root causes
+            and use evidence to decide what should change.
+          </p>
 
 
-          <article class="about-copy reveal">
+          <div class="capabilities">
 
-            <h3>
-              I pay attention to how people actually behave
-              inside a process.
-            </h3>
-
-            <p>
-              I am interested in why customers stop,
-              why employees bypass a workflow,
-              why a system is not adopted,
-              and why a process that looks correct on paper
-              does not work in practice.
-            </p>
-
-            <p>
-              That perspective has shaped my work across
-              customer journeys, marketing, ATS implementation,
-              digital event systems, operations and technology adoption.
-            </p>
-
-
-            <div class="capabilities">
-
-              <span class="capability">
-                Change Implementation
-              </span>
-
-              <span class="capability">
-                Business Systems
-              </span>
-
-              <span class="capability">
-                Process Improvement
-              </span>
-
-              <span class="capability">
-                Digital Transformation
-              </span>
-
-              <span class="capability">
-                Data & Reporting
-              </span>
-
-              <span class="capability">
-                User Adoption
-              </span>
-
-              <span class="capability">
-                Workflow Automation
-              </span>
-
-            </div>
-
-          </article>
-
-
-          <aside class="work-style reveal">
-
-            <span class="disc-badge">
-              DISC · DC
+            <span>
+              Change Implementation
             </span>
 
-            <h3>
-              Analytical.
-              Decisive.
-              Improvement-focused.
-            </h3>
+            <span>
+              Business Systems
+            </span>
 
-            <p>
-              I tend to question inefficient processes,
-              look for root causes, test alternatives
-              and use evidence to decide what should change.
-            </p>
+            <span>
+              Process Improvement
+            </span>
 
-            <p>
-              I am most engaged when the problem is unclear,
-              the process is fragmented,
-              or the requested solution does not address
-              the real constraint.
-            </p>
+            <span>
+              Digital Transformation
+            </span>
 
-          </aside>
+            <span>
+              Data & Reporting
+            </span>
 
-        </div>
+            <span>
+              User Adoption
+            </span>
+
+            <span>
+              Workflow Automation
+            </span>
+
+          </div>
+
+        </aside>
 
       </div>
 
     </section>
 
 
-    <!-- =========================
-         CREDENTIALS
-    ========================== -->
 
+    <!-- CREDENTIALS -->
     <section
       class="section section-border"
       id="credentials"
@@ -715,21 +1001,23 @@
 
       <div class="container">
 
+
         <div class="section-heading reveal">
 
-          <div class="section-kicker">
+          <p class="section-kicker">
             Credentials
-          </div>
+          </p>
 
-          <div>
+          <div class="section-heading-copy">
 
             <h2>
-              Building formal methods around work I already do.
+              Methods backed by hands-on implementation.
             </h2>
 
           </div>
 
         </div>
+
 
 
         <div class="credentials-grid">
@@ -764,11 +1052,11 @@
           <div class="credential reveal">
 
             <strong>
-              Lean Six Sigma Yellow Belt
+              Project Management Foundations
             </strong>
 
             <span>
-              In progress
+              Completed
             </span>
 
           </div>
@@ -780,50 +1068,47 @@
     </section>
 
 
-    <!-- =========================
-         CONTACT
-    ========================== -->
 
-    <section class="section">
+    <!-- CONTACT -->
+    <section
+      class="section contact-section"
+      id="contact"
+    >
 
       <div class="container">
 
         <div class="contact-panel reveal">
 
+
           <div>
 
+            <p class="section-kicker light-kicker">
+              Contact
+            </p>
+
             <h2>
-              Interested in how the system can work better?
+              Business problems are rarely only process problems.
             </h2>
 
             <p>
-              Business transformation ·
-              Change implementation ·
-              Process improvement ·
-              Business systems ·
-              AI-enabled operations
+              I work at the intersection of operations,
+              systems, customer behavior, data
+              and implementation.
             </p>
 
           </div>
 
 
-          <div class="contact-links">
+          <a
+            class="contact-email"
+            href="mailto:kgasenko@gmail.com"
+          >
+            kgasenko@gmail.com
 
-            <a href="mailto:kgasenko@gmail.com">
-              kgasenko@gmail.com
-            </a>
-
-            <!-- Add your LinkedIn URL later -->
-            <a href="#">
-              LinkedIn
-            </a>
-
-            <!-- We will connect the resume PDF later -->
-            <a href="#">
-              Resume PDF
-            </a>
-
-          </div>
+            <span>
+              →
+            </span>
+          </a>
 
         </div>
 
@@ -834,258 +1119,27 @@
   </main>
 
 
-  <!-- =========================
-       FOOTER
-  ========================== -->
 
+  <!-- FOOTER -->
   <footer class="site-footer">
 
-    <div class="container">
-      © 2026 Kseniia Gasenko
+    <div class="container footer-inner">
+
+      <span>
+        © <span id="year">2026</span>
+        Kseniia Gasenko
+      </span>
+
+      <a href="#top">
+        Back to top ↑
+      </a>
+
     </div>
 
   </footer>
 
 
-  <!-- Main JavaScript -->
   <script src="main.js"></script>
 
-</body>
-</html>        </div>
-        <aside class="hero-note reveal">
-          <div class="hero-note-label">My focus</div>
-          <p>
-            Business transformation, technology adoption, process improvement, data-informed decisions and practical change implementation.
-          </p>
-        </aside>
-      </div>
-    </section>
-
-    <section class="section section-border" id="approach">
-      <div class="container">
-        <div class="section-heading reveal">
-          <div class="section-kicker">My approach</div>
-          <div>
-            <h2>Start with the problem. Prove the cause. Change what matters.</h2>
-            <p>
-              My project logic is based on Lean Six Sigma DMAIC, adapted for business transformation so the process remains clear to any hiring manager or client.
-            </p>
-          </div>
-        </div>
-
-        <div class="method-grid">
-          <article class="method-step reveal">
-            <span class="method-code">D · DEFINE</span>
-            <h3>What was</h3>
-            <p>Clarify the business need, starting process and expected outcome.</p>
-          </article>
-          <article class="method-step reveal">
-            <span class="method-code">M · MEASURE</span>
-            <h3>Baseline</h3>
-            <p>Look at volume, time, cost, errors, workload, conversion and constraints.</p>
-          </article>
-          <article class="method-step reveal">
-            <span class="method-code">A · ANALYZE</span>
-            <h3>What I found</h3>
-            <p>Find the root cause, including behavior, system gaps and process friction.</p>
-          </article>
-          <article class="method-step reveal">
-            <span class="method-code">I · IMPROVE</span>
-            <h3>What I changed</h3>
-            <p>Redesign the process, system, customer journey or operating model.</p>
-          </article>
-          <article class="method-step reveal">
-            <span class="method-code">C · CONTROL</span>
-            <h3>What it became</h3>
-            <p>Standardize the new way of working through systems, reporting and adoption.</p>
-          </article>
-          <article class="method-step reveal">
-            <span class="method-code">R · RESULTS</span>
-            <h3>Business impact</h3>
-            <p>Show what changed in measurable business terms.</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="section section-border" id="work">
-      <div class="container">
-        <div class="section-heading reveal">
-          <div class="section-kicker">Selected work</div>
-          <div>
-            <h2>Four transformations. One way of thinking.</h2>
-            <p>
-              Each case study shows the initial business condition, the root cause I identified, the change I implemented and the measurable result.
-            </p>
-          </div>
-        </div>
-
-        <div class="work-grid">
-          <a class="project-card reveal" href="tbest.html">
-            <div>
-              <div class="project-top">
-                <span class="project-number">01</span>
-                <span class="project-status">Systems + Growth</span>
-              </div>
-              <h3>TBest Services</h3>
-              <p>Recruiting and business systems transformation built around candidate acquisition, hiring feasibility, data visibility and team adoption.</p>
-            </div>
-            <div>
-              <div class="metric-row">
-                <div class="metric">2–3×</div>
-                <div class="metric-caption">candidate volume with limited promotion</div>
-              </div>
-              <div class="case-link">View transformation <span>→</span></div>
-            </div>
-          </a>
-
-          <a class="project-card reveal" href="cme.html">
-            <div>
-              <div class="project-top">
-                <span class="project-number">02</span>
-                <span class="project-status">Digital Transformation</span>
-              </div>
-              <h3>CME / Healthcare Events</h3>
-              <p>Moved a manual, geographically limited event model into a low-cost digital ecosystem for registration, delivery, testing and certification.</p>
-            </div>
-            <div>
-              <div class="metric-row">
-                <div class="metric">1K–4K</div>
-                <div class="metric-caption">participants at one time vs. roughly 100–500 before</div>
-              </div>
-              <div class="case-link">View transformation <span>→</span></div>
-            </div>
-          </a>
-
-          <a class="project-card reveal" href="olenka.html">
-            <div>
-              <div class="project-top">
-                <span class="project-number">03</span>
-                <span class="project-status">Revenue + Operations</span>
-              </div>
-              <h3>Olenka School of Music</h3>
-              <p>Reprioritized the transformation around lead generation and enrollment first, then moved into school-management system selection and implementation.</p>
-            </div>
-            <div>
-              <div class="metric-row">
-                <div class="metric">~4×</div>
-                <div class="metric-caption">first-month registrations and revenue vs. same period prior year</div>
-              </div>
-              <div class="case-link">View transformation <span>→</span></div>
-            </div>
-          </a>
-
-          <a class="project-card reveal" href="hotel.html">
-            <div>
-              <div class="project-top">
-                <span class="project-number">04</span>
-                <span class="project-status">Operating Model</span>
-              </div>
-              <h3>Hotel Complex</h3>
-              <p>Redesigned roles, service coverage and incentives after identifying fragmented ownership, decision fatigue and schedule mismatch with customer behavior.</p>
-            </div>
-            <div>
-              <div class="metric-row">
-                <div class="metric">~90%</div>
-                <div class="metric-caption">banquet events using internal event services</div>
-              </div>
-              <div class="case-link">View transformation <span>→</span></div>
-            </div>
-          </a>
-        </div>
-      </div>
-    </section>
-
-    <section class="section section-border" id="about">
-      <div class="container">
-        <div class="section-heading reveal">
-          <div class="section-kicker">How I work</div>
-          <div>
-            <h2>Behavior + systems + measurable change.</h2>
-          </div>
-        </div>
-
-        <div class="about-grid">
-          <article class="about-copy reveal">
-            <h3>I pay attention to how people actually behave inside a process.</h3>
-            <p>
-              I am interested in why customers stop, why employees bypass a workflow, why a system is not adopted, and why a process that looks correct on paper does not work in practice.
-            </p>
-            <p>
-              That perspective has shaped my work across customer journeys, marketing, ATS implementation, digital event systems, operations and technology adoption.
-            </p>
-            <div class="capabilities">
-              <span class="capability">Change Implementation</span>
-              <span class="capability">Business Systems</span>
-              <span class="capability">Process Improvement</span>
-              <span class="capability">Digital Transformation</span>
-              <span class="capability">Data & Reporting</span>
-              <span class="capability">User Adoption</span>
-              <span class="capability">Workflow Automation</span>
-            </div>
-          </article>
-
-          <aside class="work-style reveal">
-            <span class="disc-badge">DISC · DC</span>
-            <h3>Analytical. Decisive. Improvement-focused.</h3>
-            <p>
-              I tend to question inefficient processes, look for root causes, test alternatives and use evidence to decide what should change.
-            </p>
-            <p>
-              I am most engaged when the problem is unclear, the process is fragmented, or the requested solution does not address the real constraint.
-            </p>
-          </aside>
-        </div>
-      </div>
-    </section>
-
-    <section class="section section-border" id="credentials">
-      <div class="container">
-        <div class="section-heading reveal">
-          <div class="section-kicker">Credentials</div>
-          <div>
-            <h2>Building formal methods around work I already do.</h2>
-          </div>
-        </div>
-
-        <div class="credentials-grid">
-          <div class="credential reveal">
-            <strong>Google Data Analytics Professional Certificate</strong>
-            <span>Completed</span>
-          </div>
-          <div class="credential reveal">
-            <strong>Google Digital Marketing & E-Commerce Certificate</strong>
-            <span>Completed</span>
-          </div>
-          <div class="credential reveal">
-            <strong>Lean Six Sigma Yellow Belt</strong>
-            <span>In progress — list only while actively enrolled</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="container">
-        <div class="contact-panel reveal">
-          <div>
-            <h2>Interested in how the system can work better?</h2>
-            <p>Business transformation · Change implementation · Process improvement · Business systems · AI-enabled operations</p>
-          </div>
-          <div class="contact-links">
-            <a href="mailto:kgasenko@gmail.com">kgasenko@gmail.com</a>
-            <a href="#">LinkedIn</a>
-            <a href="#">Resume PDF</a>
-          </div>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer class="site-footer">
-    <div class="container">© <span id="year"></span> Kseniia Gasenko</div>
-  </footer>
-
-  <script src="js/main.js"></script>
 </body>
 </html>
