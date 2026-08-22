@@ -3,15 +3,6 @@
    BUSINESS TRANSFORMATION & CHANGE PORTFOLIO
 
    MAIN STYLESHEET
-   ------------------------------------------------------------
-   Direction:
-   - clean consulting / transformation portfolio
-   - warm near-white background
-   - graphite text
-   - cobalt + violet accents
-   - natural-height editorial layouts
-   - no tiny dashboard-style cards
-   - desktop body text 16px+
 ============================================================ */
 
 
@@ -21,15 +12,15 @@
 
 :root {
 
-  /* Backgrounds */
   --page-bg: #fffefa;
   --page-bg-soft: #fdfcf9;
+
   --surface: #ffffff;
   --surface-soft: #fcfcff;
   --surface-violet: #f8f6ff;
   --surface-blue: #f6f8ff;
 
-  /* Text — graphite, NOT navy */
+  /* Graphite — no navy */
   --ink: #292938;
   --ink-strong: #20202d;
   --ink-soft: #464958;
@@ -71,7 +62,7 @@
     0 26px 64px
     rgba(48, 48, 66, 0.095);
 
-  /* Shape */
+  /* Radius */
   --radius-xl: 24px;
   --radius-lg: 19px;
   --radius-md: 15px;
@@ -287,7 +278,7 @@ img {
   height: 18px;
 
   background:
-    rgba(255, 255, 255, 0.50);
+    rgba(255, 255, 255, 0.5);
 }
 
 
@@ -329,7 +320,7 @@ img {
 }
 
 
-/* Compatibility with old header HTML */
+/* fallback for old index */
 
 .brand-name {
   color:
@@ -345,7 +336,7 @@ img {
 
 
 /* ============================================================
-   05. DESKTOP NAV
+   05. DESKTOP NAVIGATION
 ============================================================ */
 
 .desktop-nav {
@@ -591,8 +582,6 @@ img {
 }
 
 
-/* warm glow */
-
 .hero::before {
   content: "";
 
@@ -616,8 +605,6 @@ img {
   pointer-events: none;
 }
 
-
-/* dotted detail */
 
 .hero::after {
   content: "";
@@ -1281,22 +1268,21 @@ img {
 ============================================================ */
 
 #work {
-  background: #ffffff;
+  background:
+    #ffffff;
 }
 
 
 /* ============================================================
-   13. PROJECT GRID
+   13. PROJECT LIST
+   One full-width project per row
 ============================================================ */
 
 .work-grid {
   display: grid;
 
   grid-template-columns:
-    repeat(
-      2,
-      minmax(0, 1fr)
-    );
+    1fr;
 
   gap: 24px;
 
@@ -1304,21 +1290,21 @@ img {
 }
 
 
-/* First project featured */
-
 .project-featured {
-  grid-column:
-    1 / -1;
+  grid-column: auto;
 }
 
 
 /* ============================================================
-   14. PROJECT CARDS
+   14. PROJECT CARD
 ============================================================ */
 
 .project-card {
   --card-accent:
-    var(--violet);
+    #7455df;
+
+  --card-wash:
+    #f7f4ff;
 
   position: relative;
 
@@ -1335,14 +1321,19 @@ img {
     1px solid
     var(--border);
 
-  border-radius: 18px;
+  border-radius: 20px;
 
   background:
-    #ffffff;
+    linear-gradient(
+      120deg,
+      #ffffff 0%,
+      #ffffff 72%,
+      var(--card-wash) 100%
+    );
 
   box-shadow:
-    0 8px 28px
-    rgba(51, 51, 72, 0.05);
+    0 9px 30px
+    rgba(45, 45, 65, 0.05);
 
   transition:
     transform 220ms var(--ease),
@@ -1351,35 +1342,54 @@ img {
 }
 
 
+/* Project accents */
+
 .project-card:nth-child(1) {
   --card-accent:
-    #7057dc;
+    #7455df;
+
+  --card-wash:
+    #f5f1ff;
 }
 
 
 .project-card:nth-child(2) {
   --card-accent:
     #4d69df;
+
+  --card-wash:
+    #f1f5ff;
 }
 
 
 .project-card:nth-child(3) {
   --card-accent:
     #805bdc;
+
+  --card-wash:
+    #f6f1ff;
 }
 
 
 .project-card:nth-child(4) {
   --card-accent:
-    #508fcf;
+    #4c8dce;
+
+  --card-wash:
+    #f1f8fc;
 }
 
 
 .project-card:nth-child(5) {
   --card-accent:
     #6756cb;
+
+  --card-wash:
+    #f5f3ff;
 }
 
+
+/* vertical accent */
 
 .project-card::before {
   content: "";
@@ -1387,22 +1397,45 @@ img {
   position: absolute;
 
   top: 0;
+  bottom: 0;
   left: 0;
-  right: 0;
 
-  height: 4px;
+  width: 5px;
 
   background:
     linear-gradient(
-      90deg,
+      180deg,
       var(--card-accent),
-      #8c70ec
+      #9479ed
     );
 }
 
 
+/* subtle background accent */
+
 .project-card::after {
-  display: none;
+  content: "";
+
+  position: absolute;
+
+  right: -110px;
+  top: -130px;
+
+  width: 300px;
+  height: 300px;
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle,
+      var(--card-wash) 0%,
+      transparent 70%
+    );
+
+  opacity: 0.8;
+
+  pointer-events: none;
 }
 
 
@@ -1411,15 +1444,15 @@ img {
     translateY(-4px);
 
   border-color:
-    #ced0dd;
+    #cacbd7;
 
   box-shadow:
-    0 16px 40px
-    rgba(51, 51, 72, 0.09);
+    0 18px 46px
+    rgba(45, 45, 65, 0.09);
 }
 
 
-/* remove project numbers / micro tags */
+/* Remove old tiny card information */
 
 .project-card-head,
 .project-number,
@@ -1434,23 +1467,34 @@ img {
 
 .project-content,
 .project-featured .project-content {
-  display: block;
+  position: relative;
+  z-index: 2;
+
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 1.2fr)
+    minmax(360px, 0.8fr);
+
+  gap: 54px;
+
+  align-items: center;
 
   flex: 1;
 
   padding:
-    34px 34px
-    0;
+    40px 42px
+    28px;
 }
 
 
 .project-copy {
-  max-width: 680px;
+  max-width: 760px;
 }
 
 
 .project-featured .project-copy {
-  max-width: 900px;
+  max-width: 760px;
 }
 
 
@@ -1458,6 +1502,10 @@ img {
   display: none;
 }
 
+
+/* ============================================================
+   16. PROJECT TITLE
+============================================================ */
 
 .project-card h3 {
   max-width: none;
@@ -1476,26 +1524,28 @@ img {
 
   font-size:
     clamp(
-      2rem,
-      2.4vw,
-      2.65rem
+      2.35rem,
+      3vw,
+      3.2rem
     );
 
-  line-height: 1.08;
+  line-height: 1.04;
 
   font-weight: 600;
 
   letter-spacing:
-    -0.035em;
+    -0.04em;
+
+  text-wrap: balance;
 }
 
 
 .project-role {
-  max-width: 50ch;
+  max-width: 52ch;
 
   margin:
     0 0
-    20px;
+    21px;
 
   color:
     var(--card-accent);
@@ -1504,26 +1554,26 @@ img {
 
   line-height: 1.5;
 
-  font-weight: 680;
+  font-weight: 700;
 }
 
 
 .project-problem,
 .project-change {
-  max-width: 62ch;
+  max-width: 65ch;
 
   margin: 0;
 
   color:
     var(--body);
 
-  font-size: 16px;
+  font-size: 17px;
 
-  line-height: 1.7;
+  line-height: 1.72;
 }
 
 
-/* Detailed transformation only on featured case */
+/* Expanded description only on first featured case */
 
 .project-change {
   display: none;
@@ -1533,12 +1583,15 @@ img {
 .project-featured .project-change {
   display: block;
 
-  margin-top: 13px;
+  margin-top: 14px;
+
+  color:
+    var(--ink-soft);
 }
 
 
 /* ============================================================
-   16. PROJECT METRICS
+   17. PROJECT RESULTS
 ============================================================ */
 
 .project-impact {
@@ -1547,24 +1600,23 @@ img {
   display: grid;
 
   grid-template-columns:
-    repeat(
-      3,
-      minmax(0, 1fr)
-    );
+    1fr;
 
   gap: 0;
 
-  margin-top: 28px;
+  margin: 0;
 
   padding:
-    24px 0
-    3px;
+    0 0
+    0 36px;
 
-  border-top:
+  border-top: 0;
+
+  border-left:
     1px solid
-    var(--border-soft);
+    #e3e3e9;
 
-  border-left: 0;
+  align-content: center;
 }
 
 
@@ -1572,56 +1624,65 @@ img {
   min-width: 0;
 
   padding:
-    0 22px;
+    18px 0;
+
+  border: 0;
 }
 
 
 .metric-block:first-child {
-  padding-left: 0;
+  padding-top: 0;
+}
+
+
+.metric-block:last-child {
+  padding-bottom: 0;
 }
 
 
 .metric-block + .metric-block {
-  border-left:
+  border-left: 0;
+
+  border-top:
     1px solid
-    var(--border-soft);
+    #e8e8ed;
 }
 
 
 .metric-block strong {
   display: block;
 
-  margin-bottom: 7px;
+  margin-bottom: 6px;
 
   color:
     var(--card-accent);
 
-  font-size: 23px;
+  font-size: 26px;
 
-  line-height: 1.12;
+  line-height: 1.1;
 
   font-weight: 770;
 
   letter-spacing:
-    -0.025em;
+    -0.03em;
 }
 
 
 .metric-block span {
   display: block;
 
-  max-width: 28ch;
+  max-width: 32ch;
 
   color:
     var(--muted);
 
   font-size: 16px;
 
-  line-height: 1.5;
+  line-height: 1.55;
 }
 
 
-/* Homepage should not show detailed workflow pills */
+/* no small workflow pills on homepage */
 
 .workflow-strip {
   display: none;
@@ -1629,27 +1690,40 @@ img {
 
 
 /* ============================================================
-   17. CASE LINK
+   18. CASE STUDY LINK
 ============================================================ */
 
 .case-link {
-  min-height: 62px;
+  position: relative;
+  z-index: 3;
 
-  display: flex;
+  width: fit-content;
+
+  min-height: 46px;
+
+  display: inline-flex;
 
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
 
-  gap: 16px;
+  gap: 14px;
 
-  margin-top: 25px;
+  margin:
+    0 40px
+    30px
+    auto;
 
   padding:
-    0 34px;
+    0 18px;
 
-  border-top:
+  border:
     1px solid
-    var(--border-soft);
+    #d9d9e3;
+
+  border-radius: 999px;
+
+  background:
+    rgba(255, 255, 255, 0.94);
 
   color:
     var(--card-accent);
@@ -1659,13 +1733,26 @@ img {
   font-weight: 700;
 
   transition:
-    background 180ms ease;
+    transform 180ms ease,
+    border-color 180ms ease,
+    background 180ms ease,
+    box-shadow 180ms ease;
 }
 
 
 .case-link:hover {
+  transform:
+    translateY(-2px);
+
+  border-color:
+    #c8c6d8;
+
   background:
-    #fafafd;
+    var(--card-wash);
+
+  box-shadow:
+    0 7px 18px
+    rgba(45, 45, 65, 0.06);
 }
 
 
@@ -1682,12 +1769,12 @@ img {
 
 .case-link:hover .case-arrow {
   transform:
-    translateX(5px);
+    translateX(4px);
 }
 
 
 /* ============================================================
-   18. APPROACH
+   19. APPROACH SECTION
 ============================================================ */
 
 .approach-section {
@@ -1729,7 +1816,7 @@ img {
 
 
 /* ============================================================
-   19. DMAIC
+   20. DMAIC
 ============================================================ */
 
 .method-grid {
@@ -1862,7 +1949,7 @@ img {
 
 
 /* ============================================================
-   20. ABOUT
+   21. ABOUT
 ============================================================ */
 
 .about-grid {
@@ -1904,7 +1991,7 @@ img {
 
 
 /* ============================================================
-   21. WORK STYLE
+   22. WORK STYLE
 ============================================================ */
 
 .work-style {
@@ -2072,7 +2159,7 @@ img {
 
 
 /* ============================================================
-   22. CREDENTIALS
+   23. CREDENTIALS
 ============================================================ */
 
 .credentials-section {
@@ -2210,7 +2297,7 @@ img {
 
 
 /* ============================================================
-   23. DOCUMENTS
+   24. DOCUMENTS
 ============================================================ */
 
 .documents-panel {
@@ -2424,7 +2511,8 @@ img {
       var(--violet)
     );
 
-  color: #ffffff;
+  color:
+    #ffffff;
 
   box-shadow:
     0 9px 22px
@@ -2438,7 +2526,7 @@ img {
 
 
 /* ============================================================
-   24. CONTACT / LEAD GENERATION
+   25. CONTACT / LEAD GENERATION
 ============================================================ */
 
 .contact-section {
@@ -2532,7 +2620,7 @@ img {
 
 
 /* ============================================================
-   25. CONTACT FORM
+   26. CONTACT FORM
 ============================================================ */
 
 .contact-form {
@@ -2743,8 +2831,7 @@ img {
 
 
 /* ============================================================
-   26. OLD CONTACT PANEL FALLBACK
-   Remove later after index is updated
+   27. OLD CONTACT FALLBACK
 ============================================================ */
 
 .contact-panel {
@@ -2845,7 +2932,7 @@ img {
 
 
 /* ============================================================
-   27. FOOTER
+   28. FOOTER
 ============================================================ */
 
 .site-footer {
@@ -2910,7 +2997,7 @@ img {
 
 
 /* ============================================================
-   28. SAFE REVEAL
+   29. REVEAL
 ============================================================ */
 
 .reveal {
@@ -2933,7 +3020,7 @@ img {
 
 
 /* ============================================================
-   29. ANIMATION
+   30. ANIMATION
 ============================================================ */
 
 @keyframes hero-float {
@@ -2990,7 +3077,7 @@ img {
 
 
 /* ============================================================
-   30. LARGE DESKTOP
+   31. LARGE DESKTOP
 ============================================================ */
 
 @media (min-width: 1500px) {
@@ -3016,21 +3103,20 @@ img {
   .project-content,
   .project-featured .project-content {
     padding:
-      38px 38px
-      0;
+      44px 48px
+      30px;
   }
 
 
   .case-link {
-    padding:
-      0 38px;
+    margin-right: 48px;
   }
 
 }
 
 
 /* ============================================================
-   31. LAPTOP
+   32. LAPTOP
 ============================================================ */
 
 @media (max-width: 1200px) {
@@ -3064,8 +3150,6 @@ img {
 
   .desktop-nav {
     gap: 20px;
-
-    font-size: 16px;
   }
 
 
@@ -3091,6 +3175,16 @@ img {
         5vw,
         4.05rem
       );
+  }
+
+
+  .project-content,
+  .project-featured .project-content {
+    grid-template-columns:
+      minmax(0, 1.1fr)
+      minmax(300px, 0.9fr);
+
+    gap: 40px;
   }
 
 
@@ -3125,7 +3219,7 @@ img {
 
 
 /* ============================================================
-   32. TABLET
+   33. TABLET
 ============================================================ */
 
 @media (max-width: 900px) {
@@ -3144,7 +3238,7 @@ img {
   }
 
 
-  /* Header */
+  /* header */
 
   .site-header {
     padding: 5px 0;
@@ -3252,7 +3346,7 @@ img {
   }
 
 
-  /* Hero */
+  /* hero */
 
   .hero {
     padding:
@@ -3279,7 +3373,7 @@ img {
   }
 
 
-  /* Sections */
+  /* sections */
 
   .section {
     padding:
@@ -3287,26 +3381,70 @@ img {
   }
 
 
-  /* Projects */
+  /* projects */
 
   .work-grid {
-    grid-template-columns:
-      1fr;
-
     gap: 18px;
-  }
-
-
-  .project-featured {
-    grid-column: auto;
   }
 
 
   .project-content,
   .project-featured .project-content {
+    grid-template-columns:
+      1fr;
+
+    gap: 26px;
+
     padding:
-      31px 30px
+      32px 30px
+      24px;
+  }
+
+
+  .project-impact {
+    grid-template-columns:
+      repeat(
+        3,
+        minmax(0, 1fr)
+      );
+
+    padding:
+      22px 0
       0;
+
+    border-left: 0;
+
+    border-top:
+      1px solid
+      #e3e3e9;
+  }
+
+
+  .metric-block {
+    padding:
+      0 18px;
+  }
+
+
+  .metric-block:first-child {
+    padding-left: 0;
+  }
+
+
+  .metric-block + .metric-block {
+    border-top: 0;
+
+    border-left:
+      1px solid
+      #e8e8ed;
+  }
+
+
+  .case-link {
+    margin:
+      0 30px
+      26px
+      auto;
   }
 
 
@@ -3406,7 +3544,7 @@ img {
 
 
 /* ============================================================
-   33. MOBILE
+   34. MOBILE
 ============================================================ */
 
 @media (max-width: 600px) {
@@ -3636,7 +3774,12 @@ img {
 
 
   .project-card {
-    border-radius: 15px;
+    border-radius: 16px;
+  }
+
+
+  .project-card::before {
+    width: 4px;
   }
 
 
@@ -3648,13 +3791,18 @@ img {
   .project-content,
   .project-featured .project-content {
     padding:
-      26px 20px
-      0;
+      27px 21px
+      22px;
   }
 
 
   .project-card h3 {
-    font-size: 27px;
+    font-size:
+      clamp(
+        2rem,
+        9vw,
+        2.55rem
+      );
   }
 
 
@@ -3669,16 +3817,22 @@ img {
     grid-template-columns:
       1fr;
 
-    margin-top: 21px;
+    padding:
+      8px 0
+      0;
 
-    padding-top: 8px;
+    border-top:
+      1px solid
+      #e3e3e9;
+
+    border-left: 0;
   }
 
 
   .metric-block,
   .metric-block:first-child {
     padding:
-      13px 0;
+      14px 0;
   }
 
 
@@ -3687,7 +3841,7 @@ img {
 
     border-top:
       1px solid
-      var(--border-soft);
+      #e8e8ed;
   }
 
 
@@ -3697,19 +3851,24 @@ img {
 
 
   .metric-block span {
-    max-width: 34ch;
-
     font-size: 16px;
   }
 
 
   .case-link {
-    min-height: 58px;
+    width:
+      calc(100% - 42px);
 
-    padding:
-      0 20px;
+    min-height: 50px;
 
-    font-size: 16px;
+    margin:
+      0 21px
+      22px;
+
+    justify-content:
+      space-between;
+
+    border-radius: 10px;
   }
 
 
@@ -3928,7 +4087,7 @@ img {
 
 
 /* ============================================================
-   34. VERY SMALL MOBILE
+   35. VERY SMALL MOBILE
 ============================================================ */
 
 @media (max-width: 380px) {
@@ -3964,7 +4123,7 @@ img {
 
 
 /* ============================================================
-   35. REDUCED MOTION
+   36. REDUCED MOTION
 ============================================================ */
 
 @media (prefers-reduced-motion: reduce) {
