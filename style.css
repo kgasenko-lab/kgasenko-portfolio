@@ -1,42 +1,253 @@
-body {
-  font-size: 17px;
+/* ============================================================
+   DOCUMENTS
+============================================================ */
+
+.documents-panel {
+  margin-top: 34px;
+
+  display: grid;
+
+  grid-template-columns:
+    minmax(300px, 0.8fr)
+    minmax(520px, 1.2fr);
+
+  gap: 56px;
+
+  align-items: center;
+
+  padding: 34px 38px;
+
+  border:
+    1px solid #e1e3eb;
+
+  border-radius: 18px;
+
+  background:
+    linear-gradient(
+      120deg,
+      #ffffff 0%,
+      #fcfbff 55%,
+      #f6f4ff 100%
+    );
+
+  box-shadow:
+    0 12px 34px
+    rgba(66, 69, 99, 0.06);
 }
 
-.desktop-nav {
-  font-size: 16px;
-}
 
-.hero-lead {
-  font-size: 18px;
-}
+.documents-label {
+  margin:
+    0 0
+    8px;
 
-.project-role {
-  font-size: 16px;
-}
+  color:
+    #6048d2;
 
-.metric-block strong {
-  font-size: 22px;
-}
-
-.metric-block span {
-  font-size: 16px;
-}
-
-.method-step p {
-  font-size: 16px;
-}
-
-.about-copy p {
-  font-size: 17px;
-}
-
-.credential strong {
-  font-size: 16px;
-}
-
-/* Only genuinely secondary labels */
-.section-kicker,
-.documents-label,
-.method-code {
   font-size: 14px;
+
+  line-height: 1.4;
+
+  font-weight: 800;
+
+  letter-spacing: 0.08em;
+
+  text-transform: uppercase;
+}
+
+
+.documents-copy h3 {
+  margin: 0;
+
+  color:
+    #292938;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: 30px;
+
+  line-height: 1.15;
+
+  font-weight: 600;
+
+  letter-spacing: -0.025em;
+}
+
+
+.documents-copy p:not(.documents-label) {
+  max-width: 46ch;
+
+  margin:
+    12px 0
+    0;
+
+  color:
+    #626779;
+
+  font-size: 16px;
+
+  line-height: 1.65;
+}
+
+
+.documents-actions {
+  display: grid;
+
+  grid-template-columns:
+    repeat(
+      3,
+      minmax(0, 1fr)
+    );
+
+  gap: 12px;
+}
+
+
+.document-button {
+  min-height: 68px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 18px;
+
+  padding:
+    0 18px;
+
+  border:
+    1px solid #dadee9;
+
+  border-radius: 12px;
+
+  background:
+    rgba(255, 255, 255, 0.94);
+
+  color:
+    #303343;
+
+  font-size: 16px;
+
+  line-height: 1.35;
+
+  font-weight: 680;
+
+  transition:
+    transform 180ms ease,
+    border-color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+
+.document-button:hover {
+  transform:
+    translateY(-3px);
+
+  border-color:
+    #bbbfe0;
+
+  box-shadow:
+    0 10px 24px
+    rgba(69, 71, 104, 0.08);
+}
+
+
+.document-button span:last-child {
+  color:
+    #654bd8;
+
+  font-size: 20px;
+}
+
+
+.document-button-primary {
+  border-color:
+    transparent;
+
+  background:
+    linear-gradient(
+      115deg,
+      #4c6ae5,
+      #7455df
+    );
+
+  color:
+    #ffffff;
+
+  box-shadow:
+    0 9px 22px
+    rgba(93, 80, 206, 0.17);
+}
+
+
+.document-button-primary span:last-child {
+  color:
+    #ffffff;
+}
+
+
+/* TABLET */
+
+@media (max-width: 900px) {
+
+  .documents-panel {
+    grid-template-columns:
+      1fr;
+
+    gap: 26px;
+
+    padding: 28px;
+  }
+
+
+  .documents-actions {
+    grid-template-columns:
+      1fr;
+  }
+
+
+  .document-button {
+    min-height: 60px;
+  }
+
+}
+
+
+/* MOBILE */
+
+@media (max-width: 600px) {
+
+  .documents-panel {
+    margin-top: 26px;
+
+    padding: 22px 20px;
+
+    border-radius: 15px;
+  }
+
+
+  .documents-copy h3 {
+    font-size: 26px;
+  }
+
+
+  .documents-copy p:not(.documents-label) {
+    font-size: 16px;
+  }
+
+
+  .document-button {
+    min-height: 58px;
+
+    padding:
+      0 16px;
+
+    font-size: 16px;
+  }
+
 }
