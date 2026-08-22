@@ -43,20 +43,21 @@
       <!-- BRAND -->
 
       <a
-        class="brand"
-        href="#top"
-        aria-label="Kseniia Gasenko home"
-      >
+  class="brand"
+  href="#top"
+  aria-label="Kseniia Gasenko home"
+>
+  <span class="brand-mark" aria-hidden="true">
+    <span>K</span>
+    <span class="brand-divider"></span>
+    <span>G</span>
+  </span>
 
-        <span class="brand-mark">
-          KG
-        </span>
-
-        <span class="brand-name">
-          Kseniia Gasenko
-        </span>
-
-      </a>
+  <span class="brand-copy">
+    <strong>Kseniia Gasenko</strong>
+    <span>Business Transformation & Change</span>
+  </span>
+</a>
 
 
 
@@ -92,11 +93,12 @@
         </a>
 
         <a
-          class="nav-contact"
-          href="#contact"
-        >
-          Let's connect
-        </a>
+  class="nav-contact"
+  href="#contact"
+>
+  Start a conversation
+  <span aria-hidden="true">→</span>
+</a>
 
       </nav>
 
@@ -1491,58 +1493,183 @@
     ========================================================== -->
 
     <section
-      class="section contact-section"
-      id="contact"
-    >
+  class="section contact-section"
+  id="contact"
+>
+  <div class="container">
 
-      <div class="container">
+    <div class="contact-shell reveal">
 
+      <div class="contact-copy">
 
-        <div class="contact-panel reveal">
+        <p class="section-kicker">
+          Start a conversation
+        </p>
 
+        <h2>
+          What is getting in the way of the result you need?
+        </h2>
 
-          <div>
+        <p>
+          If you are dealing with manual work, disconnected systems,
+          customer friction, stalled growth or a process that no longer
+          scales, tell me what is happening.
+        </p>
 
-            <p class="section-kicker light-kicker">
-              Let's connect
-            </p>
-
-
-            <h2>
-              Business problems are rarely only process problems.
-            </h2>
-
-
-            <p>
-              I work at the intersection of operations,
-              systems, customer behavior, data and implementation.
-            </p>
-
-          </div>
-
-
-
-          <a
-            class="contact-email"
-            href="mailto:kgasenko@gmail.com"
-          >
-
-            <span>
-              kgasenko@gmail.com
-            </span>
-
-            <span class="contact-arrow">
-              →
-            </span>
-
-          </a>
-
-
-        </div>
+        <p class="contact-note">
+          You do not need to know the solution yet.
+          Understanding the actual problem is part of the work.
+        </p>
 
       </div>
 
-    </section>
+
+      <form
+        class="contact-form"
+        action="https://formspree.io/f/YOUR_FORM_ID"
+        method="POST"
+      >
+
+        <input
+          type="hidden"
+          name="_subject"
+          value="New inquiry from Kseniia Gasenko portfolio"
+        >
+
+
+        <div class="form-row">
+
+          <div class="form-field">
+            <label for="contact-name">
+              Name
+            </label>
+
+            <input
+              id="contact-name"
+              name="name"
+              type="text"
+              autocomplete="name"
+              required
+            >
+          </div>
+
+
+          <div class="form-field">
+            <label for="contact-email">
+              Email
+            </label>
+
+            <input
+              id="contact-email"
+              name="email"
+              type="email"
+              autocomplete="email"
+              required
+            >
+          </div>
+
+        </div>
+
+
+        <div class="form-row">
+
+          <div class="form-field">
+            <label for="contact-company">
+              Company
+              <span>Optional</span>
+            </label>
+
+            <input
+              id="contact-company"
+              name="company"
+              type="text"
+              autocomplete="organization"
+            >
+          </div>
+
+
+          <div class="form-field">
+            <label for="contact-topic">
+              What brings you here?
+            </label>
+
+            <select
+              id="contact-topic"
+              name="topic"
+              required
+            >
+              <option value="" selected disabled>
+                Select one
+              </option>
+
+              <option value="Business transformation">
+                Business transformation
+              </option>
+
+              <option value="Process or systems problem">
+                Process or systems problem
+              </option>
+
+              <option value="Digital operations">
+                Digital operations
+              </option>
+
+              <option value="Customer journey or growth">
+                Customer journey or growth
+              </option>
+
+              <option value="Job opportunity">
+                Job opportunity
+              </option>
+
+              <option value="Other">
+                Something else
+              </option>
+            </select>
+          </div>
+
+        </div>
+
+
+        <div class="form-field">
+
+          <label for="contact-message">
+            What is happening?
+          </label>
+
+          <textarea
+            id="contact-message"
+            name="message"
+            rows="6"
+            placeholder="Briefly describe the problem, project or opportunity."
+            required
+          ></textarea>
+
+        </div>
+
+
+        <div class="form-submit-row">
+
+          <button
+            class="form-submit"
+            type="submit"
+          >
+            Send inquiry
+            <span aria-hidden="true">→</span>
+          </button>
+
+          <p>
+            I typically respond within 1–2 business days.
+          </p>
+
+        </div>
+
+      </form>
+
+    </div>
+
+  </div>
+</section>
 
 
   </main>
