@@ -1,6 +1,6 @@
 /* ============================================================
-   KSENIIA GASENKO PORTFOLIO
-   MAIN JAVASCRIPT
+   KSENIIA GASENKO
+   MAIN WEBSITE JAVASCRIPT
 ============================================================ */
 
 (() => {
@@ -141,27 +141,23 @@
   });
 
 
-  /* Close menu with Escape */
-
   document.addEventListener(
     "keydown",
     (event) => {
 
-      if (event.key === "Escape") {
+      if (event.key !== "Escape") {
+        return;
+      }
 
-        closeMenu();
+      closeMenu();
 
-        if (menuToggle) {
-          menuToggle.focus();
-        }
-
+      if (menuToggle) {
+        menuToggle.focus();
       }
 
     }
   );
 
-
-  /* Close menu when moving back to desktop */
 
   window.addEventListener(
     "resize",
@@ -196,19 +192,26 @@
           return;
         }
 
-        const target =
-          document.querySelector(href);
+
+        let target;
+
+        try {
+          target =
+            document.querySelector(href);
+        } catch {
+          return;
+        }
+
 
         if (!target) {
           return;
         }
 
+
         event.preventDefault();
 
         closeMenu();
 
-
-        /* Respect reduced-motion preference */
 
         const reducedMotion =
           window.matchMedia(
@@ -226,8 +229,6 @@
             "start"
         });
 
-
-        /* Keep URL meaningful without page jump */
 
         if (
           window.history &&
@@ -253,18 +254,15 @@
   ========================================================== */
 
   /*
-     IMPORTANT:
-     Elements are visible by default in CSS.
+     Content is visible by default in CSS.
 
-     JavaScript only adds .reveal-pending
-     to elements that begin below the viewport.
+     JavaScript only temporarily hides elements
+     that begin below the first viewport.
 
-     Therefore:
-     - content does not disappear if JS fails
-     - reloads remain safe
-     - first-screen content appears immediately
+     This prevents the old "white page" problem
+     if JavaScript fails or the page is restored
+     from browser cache.
   */
-
 
   const setupRevealAnimations = () => {
 
@@ -306,14 +304,9 @@
         item.getBoundingClientRect();
 
 
-      /*
-         Only hide elements clearly below
-         the initial viewport.
-      */
-
       if (
         rect.top >
-        viewportHeight * 0.88
+        viewportHeight * 0.92
       ) {
 
         item.classList.add(
@@ -352,7 +345,7 @@
           threshold: 0.08,
 
           rootMargin:
-            "0px 0px -4% 0px"
+            "0px 0px -5% 0px"
         }
       );
 
@@ -373,8 +366,8 @@
 
 
     /*
-       Safety fallback:
-       nothing remains hidden indefinitely.
+       Final safety fallback.
+       Nothing should remain hidden indefinitely.
     */
 
     window.setTimeout(
@@ -389,7 +382,7 @@
         });
 
       },
-      4000
+      4500
     );
 
   };
@@ -406,11 +399,21 @@
         const href =
           link.getAttribute("href");
 
-        return (
-          href &&
-          href !== "#top" &&
-          document.querySelector(href)
-        );
+        if (
+          !href ||
+          href === "#top"
+        ) {
+          return false;
+        }
+
+
+        try {
+          return Boolean(
+            document.querySelector(href)
+          );
+        } catch {
+          return false;
+        }
 
       });
 
@@ -446,7 +449,7 @@
     const referencePoint =
       window.scrollY +
       headerHeight +
-      120;
+      130;
 
 
     let activeSection =
@@ -540,101 +543,157 @@
 
 
   /* ==========================================================
-     EXTERNAL / DOCUMENT LINKS
+     HEADER STATE ON SCROLL
   ========================================================== */
 
-  /*
-     Resume links with target="_blank"
-     and document links with "download"
-     are intentionally NOT intercepted.
+  const updateHeaderState = () => {
 
-     Browser behavior remains native:
+    if (!header) {
+      return;
+    }
 
-     View Resume
-       → opens PDF in a new tab
 
-     Download Resume
-       → downloads PDF
+    if (window.scrollY > 20) {
 
-     Portfolio Presentation
-       → downloads PPTX
-  */
+      header.classList.add(
+        "is-scrolled"
+      );
+
+    } else {
+
+      header.classList.remove(
+        "is-scrolled"
+      );
+
+    }
+
+  };
+
+
+  let headerTicking =
+    false;
+
+
+  window.addEventListener(
+    "scroll",
+    () => {
+
+      if (headerTicking) {
+        return;
+      }
+
+
+      headerTicking =
+        true;
+
+
+      window.requestAnimationFrame(
+        () => {
+
+          updateHeaderState();
+
+          headerTicking =
+            false;
+
+        }
+      );
+
+    },
+    {
+      passive: true
+    }
+  );
 
 
   /* ==========================================================
-     CARD INTERACTION
-     DESKTOP POINTERS ONLY
+     CONTACT FORM UX
   ========================================================== */
 
-  const projectCards =
-    $$(".project-card");
+  const contactForm =
+    $(".contact-form");
+
+  const formSubmit =
+    $(".form-submit");
 
 
-  const supportsHover =
-    window.matchMedia(
-      "(hover: hover) and (pointer: fine)"
-    ).matches;
+  if (
+    contactForm &&
+    formSubmit
+  ) {
+
+    contactForm.addEventListener(
+      "submit",
+      () => {
+
+        formSubmit.disabled =
+          true;
 
 
-  if (supportsHover) {
-
-    projectCards.forEach((card) => {
-
-      card.addEventListener(
-        "mousemove",
-        (event) => {
-
-          const rect =
-            card.getBoundingClientRect();
+        formSubmit.classList.add(
+          "is-submitting"
+        );
 
 
-          const x =
-            event.clientX -
-            rect.left;
+        const originalText =
+          formSubmit.innerHTML;
 
 
-          const y =
-            event.clientY -
-            rect.top;
+        formSubmit.dataset.originalText =
+          originalText;
 
 
-          card.style.setProperty(
-            "--pointer-x",
-            `${x}px`
-          );
+        formSubmit.innerHTML =
+          `
+            <span>Sending...</span>
+          `;
 
 
-          card.style.setProperty(
-            "--pointer-y",
-            `${y}px`
-          );
+        /*
+           If browser validation or network flow
+           returns the user to this page,
+           restore the button automatically.
+        */
 
-        }
-      );
+        window.setTimeout(
+          () => {
+
+            if (
+              document.visibilityState ===
+              "visible"
+            ) {
+
+              formSubmit.disabled =
+                false;
 
 
-      card.addEventListener(
-        "mouseleave",
-        () => {
+              formSubmit.classList.remove(
+                "is-submitting"
+              );
 
-          card.style.removeProperty(
-            "--pointer-x"
-          );
 
-          card.style.removeProperty(
-            "--pointer-y"
-          );
+              if (
+                formSubmit.dataset.originalText
+              ) {
 
-        }
-      );
+                formSubmit.innerHTML =
+                  formSubmit.dataset.originalText;
 
-    });
+              }
+
+            }
+
+          },
+          5000
+        );
+
+      }
+    );
 
   }
 
 
   /* ==========================================================
-     HASH NAVIGATION ON INITIAL LOAD
+     INITIAL HASH
   ========================================================== */
 
   const scrollToInitialHash = () => {
@@ -651,19 +710,25 @@
     }
 
 
-    const target =
-      document.querySelector(hash);
+    let target;
+
+
+    try {
+
+      target =
+        document.querySelector(hash);
+
+    } catch {
+
+      return;
+
+    }
 
 
     if (!target) {
       return;
     }
 
-
-    /*
-       Browser may already have jumped.
-       This corrects position after fonts/layout load.
-    */
 
     window.setTimeout(
       () => {
@@ -674,7 +739,7 @@
         });
 
       },
-      80
+      100
     );
 
   };
@@ -687,11 +752,6 @@
   window.addEventListener(
     "pageshow",
     () => {
-
-      /*
-         Safari / mobile browsers can restore
-         a page from cache with old animation states.
-      */
 
       revealItems.forEach((item) => {
 
@@ -713,7 +773,29 @@
       });
 
 
+      if (
+        formSubmit &&
+        formSubmit.dataset.originalText
+      ) {
+
+        formSubmit.disabled =
+          false;
+
+
+        formSubmit.classList.remove(
+          "is-submitting"
+        );
+
+
+        formSubmit.innerHTML =
+          formSubmit.dataset.originalText;
+
+      }
+
+
       updateActiveNavigation();
+
+      updateHeaderState();
 
     }
   );
@@ -731,17 +813,12 @@
 
     updateActiveNavigation();
 
+    updateHeaderState();
+
     scrollToInitialHash();
 
   };
 
-
-  /*
-     Script is currently placed immediately
-     before </body>, so DOM is normally ready.
-     This guard also makes the file safe if
-     you later move it into <head>.
-  */
 
   if (
     document.readyState ===
