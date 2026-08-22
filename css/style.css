@@ -4165,3 +4165,681 @@ img {
   }
 
 }
+/* ============================================================
+   HERO V2 — PHOTO LAYOUT
+   Add at END of style.css
+============================================================ */
+
+.hero {
+  position: relative;
+
+  overflow: hidden;
+
+  padding:
+    0;
+
+  min-height: 570px;
+
+  background:
+    linear-gradient(
+      110deg,
+      #fffefa 0%,
+      #ffffff 52%,
+      #faf8ff 100%
+    );
+
+  border-bottom:
+    1px solid
+    var(--border-soft);
+}
+
+
+/* Remove old hero decoration */
+
+.hero::before,
+.hero::after,
+.hero-glow {
+  display: none;
+}
+
+
+/* ============================================================
+   HERO GRID
+============================================================ */
+
+.hero-grid {
+  position: relative;
+
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 0.95fr)
+    minmax(560px, 1.05fr);
+
+  gap: 30px;
+
+  align-items: stretch;
+
+  min-height: 570px;
+}
+
+
+/* ============================================================
+   HERO LEFT
+============================================================ */
+
+.hero-copy {
+  position: relative;
+
+  z-index: 5;
+
+  max-width: 720px;
+
+  align-self: center;
+
+  padding:
+    58px 0
+    62px;
+}
+
+
+.eyebrow {
+  width: fit-content;
+
+  margin:
+    0 0
+    20px;
+
+  padding:
+    8px 14px;
+
+  border-radius: 999px;
+
+  background:
+    #f0ecff;
+
+  color:
+    var(--violet-strong);
+
+  font-size: 14px;
+
+  line-height: 1.35;
+
+  font-weight: 750;
+}
+
+
+.eyebrow::before {
+  content: "✦";
+
+  margin-right: 8px;
+
+  color:
+    var(--blue);
+}
+
+
+/* ============================================================
+   HERO HEADLINE
+============================================================ */
+
+.hero h1 {
+  max-width: 760px;
+
+  margin:
+    0 0
+    24px;
+
+  color:
+    var(--ink-strong);
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size:
+    clamp(
+      3.7rem,
+      4.7vw,
+      5rem
+    );
+
+  line-height: 0.99;
+
+  font-weight: 600;
+
+  letter-spacing:
+    -0.048em;
+
+  text-wrap: balance;
+}
+
+
+.hero-emphasis {
+  display: block;
+
+  color:
+    var(--violet-strong);
+}
+
+
+/* ============================================================
+   HERO DESCRIPTION
+============================================================ */
+
+.hero-lead {
+  position: relative;
+
+  max-width: 610px;
+
+  margin: 0;
+
+  padding-left: 19px;
+
+  color:
+    var(--body);
+
+  font-size: 18px;
+
+  line-height: 1.7;
+}
+
+
+.hero-lead::before {
+  content: "";
+
+  position: absolute;
+
+  left: 0;
+  top: 5px;
+  bottom: 5px;
+
+  width: 2px;
+
+  border-radius: 999px;
+
+  background:
+    linear-gradient(
+      180deg,
+      var(--blue),
+      var(--violet)
+    );
+}
+
+
+/* ============================================================
+   HERO ACTIONS
+============================================================ */
+
+.hero-actions {
+  display: flex;
+
+  align-items: center;
+
+  flex-wrap: wrap;
+
+  gap: 13px;
+
+  margin-top: 29px;
+}
+
+
+.hero .button {
+  min-height: 50px;
+
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  padding:
+    0 21px;
+
+  border-radius: 10px;
+
+  font-size: 16px;
+
+  font-weight: 700;
+}
+
+
+.hero .button-primary {
+  background:
+    linear-gradient(
+      110deg,
+      var(--blue),
+      var(--violet)
+    );
+
+  color:
+    #ffffff;
+
+  box-shadow:
+    0 10px 25px
+    rgba(96, 75, 202, 0.18);
+}
+
+
+.hero .button-primary:hover {
+  transform:
+    translateY(-2px);
+
+  box-shadow:
+    0 14px 31px
+    rgba(96, 75, 202, 0.24);
+}
+
+
+.hero .button-secondary {
+  border:
+    1px solid
+    #d4d6df;
+
+  background:
+    rgba(255, 255, 255, 0.92);
+
+  color:
+    var(--ink-soft);
+}
+
+
+.hero-text-link {
+  min-height: 48px;
+
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 8px;
+
+  padding:
+    0 5px;
+
+  color:
+    var(--violet-strong);
+
+  font-size: 16px;
+
+  font-weight: 680;
+}
+
+
+/* ============================================================
+   FOCUS LINE
+============================================================ */
+
+.hero-focus {
+  display: flex;
+
+  align-items: center;
+
+  flex-wrap: wrap;
+
+  gap: 0;
+
+  margin-top: 31px;
+
+  padding-top: 19px;
+
+  border-top:
+    1px solid
+    #e4e4ea;
+}
+
+
+.hero-focus span {
+  position: relative;
+
+  color:
+    #77798a;
+
+  font-size: 14px;
+
+  line-height: 1.4;
+
+  font-weight: 700;
+
+  letter-spacing:
+    0.075em;
+
+  text-transform: uppercase;
+}
+
+
+.hero-focus span:not(:last-child)::after {
+  content: "·";
+
+  display: inline-block;
+
+  margin:
+    0 11px;
+
+  color:
+    #afa9cf;
+}
+
+
+/* ============================================================
+   HERO PHOTO AREA
+============================================================ */
+
+.hero-photo-stage {
+  position: relative;
+
+  min-width: 0;
+  min-height: 570px;
+
+  overflow: hidden;
+
+  align-self: stretch;
+}
+
+
+/*
+   The actual image contains empty space on its left.
+   We make the image larger than its container and shift it
+   so Kseniia occupies the right side strongly.
+*/
+
+.hero-photo {
+  position: absolute;
+
+  top: 0;
+  bottom: 0;
+
+  left: -24%;
+
+  width: 124%;
+  max-width: none;
+
+  height: 100%;
+
+  object-fit: cover;
+
+  object-position:
+    68% center;
+}
+
+
+/*
+   Soft blend between text and photograph.
+*/
+
+.hero-photo-stage::before {
+  content: "";
+
+  position: absolute;
+
+  inset:
+    0 auto 0 0;
+
+  z-index: 3;
+
+  width: 28%;
+
+  background:
+    linear-gradient(
+      90deg,
+      #ffffff 0%,
+      rgba(255, 255, 255, 0.86) 30%,
+      rgba(255, 255, 255, 0) 100%
+    );
+
+  pointer-events: none;
+}
+
+
+/*
+   Soft bottom fade prevents the image from
+   looking like a rectangular banner.
+*/
+
+.hero-photo-stage::after {
+  content: "";
+
+  position: absolute;
+
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  z-index: 3;
+
+  height: 55px;
+
+  background:
+    linear-gradient(
+      0deg,
+      rgba(255, 254, 250, 0.75),
+      rgba(255, 254, 250, 0)
+    );
+
+  pointer-events: none;
+}
+
+
+/* ============================================================
+   LARGE DESKTOP
+============================================================ */
+
+@media (min-width: 1500px) {
+
+  .hero-grid {
+    grid-template-columns:
+      minmax(0, 0.92fr)
+      minmax(610px, 1.08fr);
+
+    min-height: 610px;
+
+    gap: 32px;
+  }
+
+
+  .hero {
+    min-height: 610px;
+  }
+
+
+  .hero-photo-stage {
+    min-height: 610px;
+  }
+
+
+  .hero-copy {
+    padding:
+      62px 0
+      66px;
+  }
+
+}
+
+
+/* ============================================================
+   LAPTOP
+============================================================ */
+
+@media (max-width: 1200px) {
+
+  .hero-grid {
+    grid-template-columns:
+      minmax(0, 1fr)
+      minmax(470px, 0.9fr);
+
+    gap: 18px;
+
+    min-height: 540px;
+  }
+
+
+  .hero {
+    min-height: 540px;
+  }
+
+
+  .hero-photo-stage {
+    min-height: 540px;
+  }
+
+
+  .hero h1 {
+    font-size:
+      clamp(
+        3.1rem,
+        5vw,
+        4.1rem
+      );
+  }
+
+
+  .hero-photo {
+    left: -30%;
+
+    width: 132%;
+  }
+
+}
+
+
+/* ============================================================
+   TABLET
+============================================================ */
+
+@media (max-width: 900px) {
+
+  .hero {
+    min-height: 0;
+  }
+
+
+  .hero-grid {
+    grid-template-columns:
+      1fr;
+
+    gap: 0;
+
+    min-height: 0;
+  }
+
+
+  .hero-copy {
+    max-width: 690px;
+
+    padding:
+      52px 0
+      38px;
+  }
+
+
+  .hero-photo-stage {
+    min-height: 480px;
+
+    margin:
+      0 -20px;
+  }
+
+
+  .hero-photo {
+    left: 0;
+
+    width: 100%;
+
+    object-position:
+      67% center;
+  }
+
+
+  .hero-photo-stage::before {
+    display: none;
+  }
+
+}
+
+
+/* ============================================================
+   MOBILE
+============================================================ */
+
+@media (max-width: 600px) {
+
+  .hero-copy {
+    padding:
+      38px 0
+      30px;
+  }
+
+
+  .hero h1 {
+    font-size:
+      clamp(
+        2.55rem,
+        11vw,
+        3.35rem
+      );
+
+    line-height: 1;
+  }
+
+
+  .hero-lead {
+    font-size: 16px;
+  }
+
+
+  .hero-actions {
+    display: grid;
+
+    grid-template-columns:
+      1fr;
+
+    gap: 9px;
+
+    margin-top: 24px;
+  }
+
+
+  .hero .button {
+    width: 100%;
+  }
+
+
+  .hero-text-link {
+    justify-content: center;
+  }
+
+
+  .hero-focus {
+    gap: 8px 0;
+
+    margin-top: 23px;
+  }
+
+
+  .hero-focus span {
+    font-size: 14px;
+  }
+
+
+  .hero-photo-stage {
+    min-height: 390px;
+
+    margin:
+      0 -15px;
+  }
+
+
+  .hero-photo {
+    left: -5%;
+
+    width: 108%;
+
+    object-position:
+      68% center;
+  }
+
+
+  .hero-photo-stage::after {
+    height: 35px;
+  }
+
+}
