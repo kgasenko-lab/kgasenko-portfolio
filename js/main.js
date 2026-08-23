@@ -70,7 +70,10 @@
       item.tabIndex = active ? 0 : -1;
     });
     panels.forEach((item) => { item.hidden = item !== panel; });
-    if (options.updateHash !== false) history.replaceState(null, "", `#${id}`);
+    if (options.updateHash !== false) {
+      try { history.replaceState(null, "", `#${id}`); }
+      catch { window.location.hash = id; }
+    }
     if (options.focusTab) tab.focus();
     if (options.scroll) panel.scrollIntoView({ behavior: reducedMotion.matches ? "auto" : "smooth", block: "start" });
   };
@@ -114,9 +117,9 @@
 
   const errorMessage = (field) => {
     const value = field.value.trim();
-    if (!value) return field.tagName === "SELECT" ? "Select what brings you here." : "Complete this field.";
+    if (!value) return field.tagName === "SELECT" ? "Choose how you would like to connect." : "Complete this field.";
     if (field.type === "email" && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) return "Enter a complete email address, such as name@company.com.";
-    if (field.id === "message" && value.length < 20) return "Add a little more detail (at least 20 characters).";
+    if (field.id === "message" && value.length < 12) return "Add a short note (at least 12 characters).";
     return "";
   };
 
@@ -140,7 +143,7 @@
     submit.classList.toggle("is-busy", busy);
     submit.setAttribute("aria-busy", String(busy));
     const label = $(".submit-label", submit);
-    if (label) label.textContent = busy ? "Sending…" : "Send inquiry";
+    if (label) label.textContent = busy ? "Sending…" : "Start the conversation";
   };
 
   form.addEventListener("submit", async (event) => {
