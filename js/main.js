@@ -60,15 +60,6 @@
   /* Accessible case-study tabs */
   const tabs = $$('[role="tab"][data-case-tab]');
   const panels = $$('[role="tabpanel"][data-case-panel]');
-  const dmaicMarkup = `<ol class="case-logic" aria-label="DMAIC plus Results structure"><li><b>D</b><span>Define</span></li><li><b>M</b><span>Measure</span></li><li><b>A</b><span>Analyze</span></li><li><b>I</b><span>Improve</span></li><li><b>C</b><span>Control</span></li><li class="case-logic-result"><b>R</b><span>Result</span></li></ol>`;
-  panels.forEach((panel) => {
-    const story = $(".case-story", panel);
-    if (story && !$(".case-logic", story)) story.insertAdjacentHTML("afterbegin", dmaicMarkup);
-  });
-  const onlineEvidence = $("#online-cme .case-evidence");
-  if (onlineEvidence && !$("[data-expanded-evidence]", onlineEvidence)) {
-    onlineEvidence.insertAdjacentHTML("beforeend", `<div data-expanded-evidence><hr><b>50+</b><p>Multilingual landing pages connected to the delivery workflow.</p><hr><b class="evidence-label">Near-zero-cost stack</b><p>Built to reduce manual work and third-party dependency.</p></div>`);
-  }
   const activateCase = (id, options = {}) => {
     const tab = tabs.find((item) => item.dataset.caseTab === id);
     const panel = panels.find((item) => item.id === id);
