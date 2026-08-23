@@ -617,20 +617,42 @@ img {
    07. HERO
 ============================================================ */
 
+/* ============================================================
+   HERO
+============================================================ */
+
 .hero {
   position: relative;
 
-  overflow: hidden;
-
   min-height: 650px;
 
-  background:
+  overflow: hidden;
+
+  background-color:
+    #fffefa;
+
+  background-image:
     linear-gradient(
-      112deg,
+      90deg,
       #fffefa 0%,
-      #ffffff 52%,
-      #f7f4fd 100%
-    );
+      #fffefa 34%,
+      rgba(255, 254, 250, 0.97) 42%,
+      rgba(255, 254, 250, 0.76) 53%,
+      rgba(255, 254, 250, 0.18) 67%,
+      rgba(255, 254, 250, 0) 78%
+    ),
+    url("../assets/images/hero/kseniia-photo.png");
+
+  background-repeat:
+    no-repeat;
+
+  background-position:
+    center,
+    right center;
+
+  background-size:
+    100% 100%,
+    auto 100%;
 
   border-bottom:
     1px solid
@@ -638,42 +660,453 @@ img {
 }
 
 
-.hero::before {
-  content: "";
+/* remove old decorative hero circle */
 
-  position: absolute;
-
-  width: 500px;
-  height: 500px;
-
-  left: -330px;
-  top: 170px;
-
-  border-radius: 50%;
-
-  background:
-    radial-gradient(
-      circle,
-      rgba(114, 85, 220, 0.08),
-      transparent 70%
-    );
+.hero::before,
+.hero::after {
+  display: none;
 }
 
 
+/* ============================================================
+   HERO LAYOUT
+============================================================ */
+
 .hero-grid {
+  position: relative;
+
+  z-index: 2;
+
   min-height: 650px;
 
-  display: grid;
-
-  grid-template-columns:
-    minmax(0, 0.92fr)
-    minmax(560px, 1.08fr);
-
-  gap: 55px;
+  display: flex;
 
   align-items: center;
 }
 
+
+.hero-copy {
+  width: min(100%, 760px);
+
+  max-width: 760px;
+
+  padding:
+    68px 0
+    72px;
+}
+
+
+/* ============================================================
+   HERO KICKER
+============================================================ */
+
+.hero-kicker {
+  width: fit-content;
+
+  margin:
+    0 0
+    21px;
+
+  padding:
+    8px 14px;
+
+  border:
+    1px solid
+    #ddd6ef;
+
+  border-radius:
+    999px;
+
+  background:
+    rgba(246, 242, 253, 0.92);
+
+  color:
+    #61586e;
+
+  font-size: 14px;
+
+  line-height: 1.35;
+
+  font-weight: 720;
+}
+
+
+.hero-kicker::before {
+  content: "✦";
+
+  margin-right: 8px;
+
+  color:
+    var(--violet);
+}
+
+
+/* ============================================================
+   HERO TITLE
+============================================================ */
+
+.hero h1 {
+  max-width: 720px;
+
+  margin:
+    0 0
+    25px;
+
+  color:
+    var(--text-strong);
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size:
+    clamp(
+      3.8rem,
+      4.6vw,
+      5.1rem
+    );
+
+  line-height:
+    0.98;
+
+  font-weight:
+    600;
+
+  letter-spacing:
+    -0.052em;
+
+  text-wrap:
+    balance;
+}
+
+
+.hero h1 span {
+  display:
+    block;
+}
+
+
+/* ============================================================
+   HERO BODY COPY
+============================================================ */
+
+.hero-lead {
+  position:
+    relative;
+
+  max-width:
+    650px;
+
+  margin:
+    0;
+
+  padding-left:
+    20px;
+
+  color:
+    #4f4e5a;
+
+  font-size:
+    18px;
+
+  line-height:
+    1.7;
+}
+
+
+.hero-lead::before {
+  content: "";
+
+  position:
+    absolute;
+
+  left:
+    0;
+
+  top:
+    5px;
+
+  bottom:
+    5px;
+
+  width:
+    2px;
+
+  border-radius:
+    99px;
+
+  background:
+    linear-gradient(
+      180deg,
+      var(--cobalt),
+      var(--violet)
+    );
+}
+
+
+.hero-secondary {
+  max-width:
+    620px;
+
+  margin:
+    18px 0
+    0;
+
+  color:
+    var(--muted);
+
+  font-size:
+    16px;
+
+  line-height:
+    1.65;
+}
+
+
+/* ============================================================
+   HERO ACTIONS
+============================================================ */
+
+.hero-actions {
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  flex-wrap:
+    wrap;
+
+  gap:
+    12px;
+
+  margin-top:
+    30px;
+}
+
+
+.hero-resume-link {
+  width:
+    fit-content;
+
+  display:
+    inline-flex;
+
+  align-items:
+    center;
+
+  gap:
+    8px;
+
+  margin-top:
+    18px;
+
+  color:
+    #55515d;
+
+  font-size:
+    16px;
+
+  font-weight:
+    650;
+
+  border-bottom:
+    1px solid
+    #c7c2cd;
+}
+
+
+/* ============================================================
+   LAPTOP
+============================================================ */
+
+@media (max-width: 1200px) {
+
+  .hero {
+    min-height:
+      610px;
+
+    background-position:
+      center,
+      108% center;
+
+    background-size:
+      100% 100%,
+      auto 100%;
+  }
+
+
+  .hero-grid {
+    min-height:
+      610px;
+  }
+
+
+  .hero-copy {
+    max-width:
+      650px;
+  }
+
+
+  .hero h1 {
+    max-width:
+      620px;
+
+    font-size:
+      clamp(
+        3.3rem,
+        5vw,
+        4.3rem
+      );
+  }
+
+
+  .hero-lead {
+    max-width:
+      570px;
+  }
+
+}
+
+
+/* ============================================================
+   TABLET
+============================================================ */
+
+@media (max-width: 900px) {
+
+  .hero {
+    min-height:
+      780px;
+
+    background-image:
+      linear-gradient(
+        180deg,
+        #fffefa 0%,
+        #fffefa 49%,
+        rgba(255, 254, 250, 0.90) 58%,
+        rgba(255, 254, 250, 0.25) 72%,
+        rgba(255, 254, 250, 0) 100%
+      ),
+      url("../assets/images/hero/kseniia-photo.png");
+
+    background-position:
+      center,
+      center bottom;
+
+    background-size:
+      100% 100%,
+      auto 52%;
+  }
+
+
+  .hero-grid {
+    min-height:
+      780px;
+
+    align-items:
+      flex-start;
+  }
+
+
+  .hero-copy {
+    width:
+      100%;
+
+    max-width:
+      680px;
+
+    padding:
+      52px 0
+      390px;
+  }
+
+}
+
+
+/* ============================================================
+   MOBILE
+============================================================ */
+
+@media (max-width: 600px) {
+
+  .hero {
+    min-height:
+      760px;
+
+    background-size:
+      100% 100%,
+      auto 43%;
+
+    background-position:
+      center,
+      58% bottom;
+  }
+
+
+  .hero-grid {
+    min-height:
+      760px;
+  }
+
+
+  .hero-copy {
+    padding:
+      38px 0
+      330px;
+  }
+
+
+  .hero h1 {
+    max-width:
+      100%;
+
+    font-size:
+      clamp(
+        2.65rem,
+        11vw,
+        3.45rem
+      );
+
+    line-height:
+      1;
+  }
+
+
+  .hero-lead {
+    padding-left:
+      15px;
+
+    font-size:
+      17px;
+  }
+
+
+  .hero-secondary {
+    font-size:
+      16px;
+  }
+
+
+  .hero-actions {
+    display:
+      grid;
+
+    grid-template-columns:
+      1fr;
+
+    gap:
+      9px;
+  }
+
+
+  .hero .button {
+    width:
+      100%;
+  }
+
+}
 
 /* ============================================================
    08. HERO COPY
