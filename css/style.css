@@ -49,7 +49,7 @@ h1 { max-width: 760px; margin-bottom: 28px; font-size: clamp(3.4rem, 5.1vw, 5rem
 h1 em { display: block; color: var(--violet-dark); font-style: normal; }
 h2 { max-width: 860px; margin-bottom: 24px; font-size: clamp(2.45rem, 4vw, 4rem); line-height: 1.05; }
 h3 { margin-bottom: 14px; font-size: clamp(1.6rem, 2.25vw, 2.3rem); line-height: 1.12; }
-.eyebrow { display: flex; align-items: center; gap: 10px; margin-bottom: 18px; color: #625d70; font-family: "Avenir Next", Avenir, "Trebuchet MS", sans-serif; font-size: .74rem; font-weight: 700; letter-spacing: .11em; line-height: 1.35; text-transform: uppercase; }
+.eyebrow { display: flex; align-items: center; gap: 10px; margin-bottom: 18px; color: #625d70; font-family: "Segoe UI Variable Text", "Segoe UI", Arial, sans-serif; font-size: .74rem; font-weight: 650; letter-spacing: .085em; line-height: 1.35; text-transform: uppercase; }
 .eyebrow > span { width: 8px; height: 8px; border-radius: 50%; background: var(--violet); box-shadow: 0 0 0 5px rgba(111, 86, 207, .12); }
 .section { padding: 86px 0; }
 .section-heading { margin-bottom: 38px; }
@@ -66,7 +66,7 @@ h3 { margin-bottom: 14px; font-size: clamp(1.6rem, 2.25vw, 2.3rem); line-height:
 .brand-g { margin-left: -1px; padding-right: 3px; color: var(--violet-dark); font-style: italic; }
 .brand-copy { display: grid; line-height: 1.2; }
 .brand-copy strong { font-family: "Avenir Next", Avenir, "Segoe UI Variable Display", "Segoe UI", sans-serif; font-size: 1.05rem; font-weight: 600; letter-spacing: .01em; }
-.brand-copy small { margin-top: 4px; color: var(--muted); font-family: "Avenir Next", Avenir, "Trebuchet MS", sans-serif; font-size: .68rem; letter-spacing: .035em; }
+.brand-copy small { margin-top: 4px; color: var(--muted); font-family: "Segoe UI Variable Text", "Segoe UI", Arial, sans-serif; font-size: .68rem; font-weight: 450; letter-spacing: .025em; }
 .desktop-nav { display: flex; align-items: center; gap: 30px; font-family: "Avenir Next", Avenir, "Trebuchet MS", sans-serif; font-size: .82rem; font-weight: 650; }
 .desktop-nav a:not(.nav-cta) { position: relative; padding: 12px 0; }
 .desktop-nav a:not(.nav-cta)::after { content: ""; position: absolute; right: 0; bottom: 5px; left: 0; height: 2px; transform: scaleX(0); transform-origin: right; background: var(--violet); transition: transform .2s ease; }
@@ -78,6 +78,8 @@ h3 { margin-bottom: 14px; font-size: clamp(1.6rem, 2.25vw, 2.3rem); line-height:
 .hero { min-height: 650px; display: grid; align-items: center; position: relative; overflow: hidden; border-bottom: 1px solid var(--line); background-color: var(--paper); background-image: linear-gradient(90deg, rgba(251,250,247,1) 0%, rgba(251,250,247,.99) 34%, rgba(251,250,247,.93) 45%, rgba(251,250,247,.5) 58%, rgba(251,250,247,0) 72%), url("../assets/images/hero/kseniia-photo.png?v=20260823-8"); background-repeat: no-repeat; background-position: center, right top; background-size: 100% 100%, auto 100%; }
 .hero-grid { min-height: 650px; display: flex; align-items: center; position: relative; }
 .hero-copy { width: min(100%, 690px); padding: 64px 0 70px; }
+.hero .eyebrow { gap: 0; margin-bottom: 28px; padding-left: 13px; border-left: 3px solid var(--violet); color: #4f4a59; }
+.hero .eyebrow > span { display: none; }
 .hero-lead { max-width: 650px; margin-bottom: 16px; padding-left: 20px; border-left: 2px solid var(--blue); color: #45424d; font-size: 1.2rem; line-height: 1.65; }
 .hero-support { max-width: 650px; margin-bottom: 0; color: var(--muted); }
 .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
@@ -135,7 +137,7 @@ h3 { margin-bottom: 14px; font-size: clamp(1.6rem, 2.25vw, 2.3rem); line-height:
 .case-card:hover .case-image img { transform: scale(1.025); }
 .case-content { display: flex; flex-direction: column; padding: 32px; }
 .case-card-featured .case-content { justify-content: center; padding: 40px 44px; }
-.case-type { margin-bottom: 12px; color: var(--violet-dark); font-size: .73rem; font-weight: 800; letter-spacing: .09em; text-transform: uppercase; }
+.case-type { margin-bottom: 12px; color: var(--violet-dark); font-family: "Segoe UI Variable Text", "Segoe UI", Arial, sans-serif; font-size: .73rem; font-weight: 700; letter-spacing: .075em; text-transform: uppercase; }
 .case-content > p:not(.case-type) { color: var(--ink-soft); }
 .case-content > p strong { color: var(--ink); font-weight: 700; }
 .case-intro { max-width: 760px; font-size: 1.04rem; }
@@ -221,7 +223,7 @@ h3 { margin-bottom: 14px; font-size: clamp(1.6rem, 2.25vw, 2.3rem); line-height:
   .mobile-menu a { min-height: 62px; display: flex; align-items: center; justify-content: space-between; padding-inline: 4px; border-bottom: 1px solid var(--line); font: 650 1.2rem/1.2 "Avenir Next", Avenir, "Segoe UI Variable Display", "Segoe UI", sans-serif; }
   .mobile-menu a::after { content: "→"; color: var(--violet-dark); font-family: "Avenir Next", Avenir, "Trebuchet MS", sans-serif; font-size: .95rem; }
   .mobile-menu a:hover, .mobile-menu a:focus-visible { color: var(--violet-dark); background: #f4f1fb; }
-  .hero { min-height: 0; background-image: linear-gradient(180deg, var(--paper) 0%, var(--paper) calc(100% - 430px), rgba(251,250,247,.9) calc(100% - 360px), rgba(251,250,247,.08) 100%), url("../assets/images/hero/kseniia-photo.png?v=20260823-8"); background-position: center, center bottom; background-size: 100% 100%, auto 430px; }
+  .hero { min-height: 0; background-image: linear-gradient(180deg, var(--paper) 0 calc(100% - 430px), transparent calc(100% - 430px) 100%), url("../assets/images/hero/kseniia-photo.png?v=20260823-8"); background-position: center, center bottom; background-size: 100% 100%, auto 430px; }
   .hero-grid { min-height: 0; align-items: flex-start; }
   .hero-copy { width: min(100%, 720px); padding: 50px 0 450px; }
   .impact-grid { grid-template-columns: repeat(2, 1fr); }
@@ -259,9 +261,10 @@ h3 { margin-bottom: 14px; font-size: clamp(1.6rem, 2.25vw, 2.3rem); line-height:
   .split-heading > p, .case-heading > p { margin-bottom: 0; font-size: 1rem; }
   h1 { font-size: clamp(2.75rem, 12vw, 3.7rem); }
   h2 { font-size: clamp(2.2rem, 9.5vw, 3rem); }
-  .hero { min-height: 0; background-image: linear-gradient(180deg, var(--paper) 0%, var(--paper) calc(100% - 340px), rgba(251,250,247,.9) calc(100% - 285px), rgba(251,250,247,.06) 100%), url("../assets/images/hero/kseniia-photo.png?v=20260823-8"); background-position: center, center bottom; background-size: 100% 100%, auto 340px; }
+  .hero { min-height: 0; background-image: linear-gradient(180deg, var(--paper) 0 calc(100% - 340px), transparent calc(100% - 340px) 100%), url("../assets/images/hero/kseniia-photo.png?v=20260823-8"); background-position: center, center bottom; background-size: 100% 100%, auto 340px; }
   .hero-grid { min-height: 0; }
   .hero-copy { padding: 36px 0 356px; }
+  .hero .eyebrow { margin-bottom: 23px; padding-left: 10px; font-size: .68rem; letter-spacing: .07em; }
   .hero-lead { padding-left: 15px; font-size: 1.05rem; }
   .hero-actions { display: grid; }
   .button { width: 100%; }
@@ -294,7 +297,7 @@ h3 { margin-bottom: 14px; font-size: clamp(1.6rem, 2.25vw, 2.3rem); line-height:
 @media (max-width: 380px) {
   .container { width: calc(100% - 24px); }
   h1 { font-size: clamp(2.35rem, 12.5vw, 2.85rem); }
-  .hero { background-size: 100% 100%, auto 310px; }
+  .hero { background-image: linear-gradient(180deg, var(--paper) 0 calc(100% - 310px), transparent calc(100% - 310px) 100%), url("../assets/images/hero/kseniia-photo.png?v=20260823-8"); background-size: 100% 100%, auto 310px; }
   .hero-copy { padding-top: 30px; padding-bottom: 326px; }
   .hero-actions { gap: 9px; margin-top: 24px; }
   .availability { font-size: .82rem; }
