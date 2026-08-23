@@ -75,7 +75,7 @@ h3 { margin-bottom: 14px; font-size: clamp(1.6rem, 2.25vw, 2.3rem); line-height:
 .nav-cta:hover { background: var(--violet-dark); }
 .menu-toggle, .mobile-menu { display: none; }
 
-.hero { min-height: 650px; display: grid; align-items: center; position: relative; overflow: hidden; border-bottom: 1px solid var(--line); background-color: var(--paper); background-image: linear-gradient(90deg, rgba(251,250,247,1) 0%, rgba(251,250,247,.99) 34%, rgba(251,250,247,.93) 45%, rgba(251,250,247,.5) 58%, rgba(251,250,247,0) 72%), url("../assets/images/hero/kseniia-photo.png"); background-repeat: no-repeat; background-position: center, right top; background-size: 100% 100%, cover; }
+.hero { min-height: 650px; display: grid; align-items: center; position: relative; overflow: hidden; border-bottom: 1px solid var(--line); background-color: var(--paper); background-image: linear-gradient(90deg, rgba(251,250,247,1) 0%, rgba(251,250,247,.99) 34%, rgba(251,250,247,.93) 45%, rgba(251,250,247,.5) 58%, rgba(251,250,247,0) 72%), url("../assets/images/hero/kseniia-photo.png"); background-repeat: no-repeat; background-position: center, left top; background-size: 100% 100%, auto 100%; }
 .hero-grid { min-height: 650px; display: flex; align-items: center; position: relative; }
 .hero-copy { width: min(100%, 690px); padding: 64px 0 70px; }
 .hero-lead { max-width: 650px; margin-bottom: 16px; padding-left: 20px; border-left: 2px solid var(--blue); color: #45424d; font-size: 1.2rem; line-height: 1.65; }
